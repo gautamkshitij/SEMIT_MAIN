@@ -1,0 +1,53 @@
+{
+    "type": "Java_Source Annotation_list",
+    "body": [ 
+        {
+            "type": "package",
+            "declarations"	: [ ],
+            "terminal": "tutorial"          
+          
+        },
+
+        
+        {
+            "type": "class",
+            "id": {
+                "type": "Identifier",
+                "name": "addA"
+            },
+            "params": [
+                {
+                    "type": "Identifier",
+                    "name": "d"
+                }
+            ],
+            "defaults": [],
+            "body": {
+                "type": "BlockStatement",
+                "body": [
+                    {
+                        "type": "ReturnStatement",
+                        "argument": {
+                            "type": "BinaryExpression",
+                            "operator": "+",
+                            "left": {
+                                "type": "Identifier",
+                                "name": "a"
+                            },
+                            "right": {
+                                "type": "Identifier",
+                                "name": "d"
+                            }
+                        }
+                    }
+                ]
+            },
+            "generator": false,
+            "expression": false
+        }
+        
+    ]
+}
+
+
+(JAVA_SOURCE ANNOTATION_LIST (package tutorial) (class (MODIFIER_LIST public final) HelloWorld (CLASS_TOP_LEVEL_SCOPE (VAR_DECLARATION (MODIFIER_LIST static) (TYPE int) (VAR_DECLARATOR_LIST (VAR_DECLARATOR X))) (VOID_METHOD_DECL (MODIFIER_LIST public static) main (FORMAL_PARAM_LIST (FORMAL_PARAM_STD_DECL LOCAL_MODIFIER_LIST (TYPE (QUALIFIED_TYPE_IDENT String)) (args (ARRAY_DECLARATOR_LIST ARRAY_DECLARATOR)))) (BLOCK_SCOPE (VAR_DECLARATION LOCAL_MODIFIER_LIST (TYPE int) (VAR_DECLARATOR_LIST (VAR_DECLARATOR y (EXPR 10)))) (EXPR (METHOD_CALL (. (. System out) println) (ARGUMENT_LIST (EXPR "Hello")))))))))
