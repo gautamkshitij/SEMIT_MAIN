@@ -1,0 +1,51 @@
+{
+    "_id": "30000",
+    "projectID": "1000",
+    "SourceForgeId": "51507be227184610346870fd",
+    "projectName": "discrialign",
+    "files": [
+
+        {
+            "repository": "git",
+            sourceCode: [{
+                "fileName": "pom.xml",
+                "absoluteFilePath": "/projectName/abc/a/v/b/pom.xml",
+                "fileExtension": "xml",
+                "FileSize": "1MB",
+                "linesOfCode": "100",
+                "code": {
+                    "test": {
+                        "attrib": "moretest",
+                        "content": "Turn this to JSON"
+                    }
+                }
+            }, {
+                "fileName": "pom.xml",
+                "absoluteFilePath": "/projectName/abc/a/v/b/pom.xml",
+                "fileExtension": "xml",
+                "FileSize": "1MB",
+                "linesOfCode": "100",
+                "code": {
+
+                }
+            }]
+        }, {
+            "repository": "svn",
+            sourceCode: [{
+                "fileName": "conf.xml",
+                "absoluteFilePath": "/projectName/abc/a/v/b/config.xml",
+                "fileExtension": "xml",
+                "FileSize": "1MB",
+                "linesOfCode": "100",
+                "code": {
+                    "test": {
+                        "attrib": "moretest",
+                        "content": "Turn this to JSON"
+                    }
+                }
+
+
+            }]
+        }
+    ]
+}
