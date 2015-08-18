@@ -1,101 +1,237 @@
- {
-     "_id": "20",
-     "projectID": "1000",
-     "SourceForgeId": "51507be227184610346870fd",
-     "projectName": "discrialign",
-     "files": [
 
-         {
-             "repository": "git",
-             sourceCode: [{
-                     "fileName": "HelloWorld.java",
-                     "absoluteFilePath": "/projectName/abc/a/v/b/HelloWorld.java",
-                     "fileExtension": "java",
-                     "FileSize": "1MB",
-                     "linesOfCode": "100",
-                     "code": {
-                         "tokenType": 143,
-                         "tokenName": "JAVA_SOURCE",
-                         "children": [{
-                             "tokenType": 108,
-                             "tokenName": "ANNOTATION_LIST"
-                         }, {
-                             "tokenType": 84,
-                             "tokenName": "package",
-                             "children": [{
-                                 "tokenType": 164,
-                                 "tokenName": "tutorial"
-                             }]
-                         }, {
-                             "tokenType": 61,
-                             "tokenName": "class",
-                             "children": [{
-                                 "tokenType": 145,
-                                 "tokenName": "MODIFIER_LIST",
-                                 "children": [{
-                                     "tokenType": 87,
-                                     "tokenName": "public"
-                                 }]
-                             }, {
-                                 "tokenType": 164,
-                                 "tokenName": "PrintAST"
-                             }, {
-                                 "tokenType": 123,
-                                 "tokenName": "CLASS_TOP_LEVEL_SCOPE"
-                             }]
-                         }]
-                     }
-
-                 }
-
-             ]
-
-         }, {
-             "repository": "svn",
-             sourceCode: [{
-                     "fileName": "PrintAST.java",
-                     "absoluteFilePath": "/projectName/abc/a/v/b/abc.java",
-                     "FileSize": "4MB",
-                     "linesOfCode": "1100",
-                     "fileExtension": "java",
-                     code: {
-                         "tokenType": 143,
-                         "tokenName": "JAVA_SOURCE",
-                         "children": [{
-                             "tokenType": 108,
-                             "tokenName": "ANNOTATION_LIST"
-                         }, {
-                             "tokenType": 84,
-                             "tokenName": "package",
-                             "children": [{
-                                 "tokenType": 164,
-                                 "tokenName": "tutorial"
-                             }]
-                         }, {
-                             "tokenType": 61,
-                             "tokenName": "class",
-                             "children": [{
-                                 "tokenType": 145,
-                                 "tokenName": "MODIFIER_LIST",
-                                 "children": [{
-                                     "tokenType": 87,
-                                     "tokenName": "public"
-                                 }]
-                             }, {
-                                 "tokenType": 164,
-                                 "tokenName": "PrintAST"
-                             }, {
-                                 "tokenType": 123,
-                                 "tokenName": "CLASS_TOP_LEVEL_SCOPE"
-                             }]
-                         }]
-                     }
-
-                 }
-
-             ]
-
-         }
-
-     ]
- }
+  {
+    "_id": "20",
+    "projectID": "1000",
+    "SourceForgeId": "51507be227184610346870fd",
+    "projectName": "discrialign",
+    "files": [
+      {
+        "repository": "git",
+        "sourceCode": [
+          {
+            "fileName": "HelloWorld.java",
+            "absoluteFilePath": "/projectName/abc/a/v/b/HelloWorld.java",
+            "fileExtension": "java",
+            "FileSize": "1MB",
+            "linesOfCode": "100",
+            "code": {
+              "tokenType": 143,
+              "tokenName": "JAVA_SOURCE",
+              "children": [
+                {
+                  "tokenType": 108,
+                  "tokenName": "ANNOTATION_LIST"
+                },
+                {
+                  "tokenType": 84,
+                  "tokenName": "package",
+                  "children": [
+                    {
+                      "tokenType": 164,
+                      "tokenName": "tutorial"
+                    }
+                  ]
+                },
+                {
+                  "tokenType": 61,
+                  "tokenName": "class",
+                  "children": [
+                    {
+                      "tokenType": 145,
+                      "tokenName": "MODIFIER_LIST",
+                      "children": [
+                        {
+                          "tokenType": 87,
+                          "tokenName": "public"
+                        },
+                        {
+                          "tokenType": 70,
+                          "tokenName": "final"
+                        }
+                      ]
+                    },
+                    {
+                      "tokenType": 164,
+                      "tokenName": "HelloWorld"
+                    },
+                    {
+                      "tokenType": 123,
+                      "tokenName": "CLASS_TOP_LEVEL_SCOPE",
+                      "children": [
+                        {
+                          "tokenType": 160,
+                          "tokenName": "VAR_DECLARATION",
+                          "children": [
+                            {
+                              "tokenType": 145,
+                              "tokenName": "MODIFIER_LIST",
+                              "children": [
+                                {
+                                  "tokenType": 90,
+                                  "tokenName": "static"
+                                }
+                              ]
+                            },
+                            {
+                              "tokenType": 157,
+                              "tokenName": "TYPE",
+                              "children": [
+                                {
+                                  "tokenType": 79,
+                                  "tokenName": "int"
+                                }
+                              ]
+                            },
+                            {
+                              "tokenType": 162,
+                              "tokenName": "VAR_DECLARATOR_LIST",
+                              "children": [
+                                {
+                                  "tokenType": 161,
+                                  "tokenName": "VAR_DECLARATOR",
+                                  "children": [
+                                    {
+                                      "tokenType": 164,
+                                      "tokenName": "X"
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          "tokenType": 163,
+                          "tokenName": "VOID_METHOD_DECL",
+                          "children": [
+                            {
+                              "tokenType": 145,
+                              "tokenName": "MODIFIER_LIST",
+                              "children": [
+                                {
+                                  "tokenType": 87,
+                                  "tokenName": "public"
+                                },
+                                {
+                                  "tokenType": 90,
+                                  "tokenName": "static"
+                                }
+                              ]
+                            },
+                            {
+                              "tokenType": 164,
+                              "tokenName": "main"
+                            },
+                            {
+                              "tokenType": 133,
+                              "tokenName": "FORMAL_PARAM_LIST",
+                              "children": [
+                                {
+                                  "tokenType": 134,
+                                  "tokenName": "FORMAL_PARAM_STD_DECL",
+                                  "children": [
+                                    {
+                                      "tokenType": 142,
+                                      "tokenName": "LOCAL_MODIFIER_LIST"
+                                    },
+                                    {
+                                      "tokenType": 157,
+                                      "tokenName": "TYPE",
+                                      "children": [
+                                        {
+                                          "tokenType": 151,
+                                          "tokenName": "QUALIFIED_TYPE_IDENT",
+                                          "children": [
+                                            {
+                                              "tokenType": 164,
+                                              "tokenName": "String"
+                                            }
+                                          ]
+                                        }
+                                      ]
+                                    },
+                                    {
+                                      "tokenType": 164,
+                                      "tokenName": "args",
+                                      "children": [
+                                        {
+                                          "tokenType": 114,
+                                          "tokenName": "ARRAY_DECLARATOR_LIST",
+                                          "children": [
+                                            {
+                                              "tokenType": 113,
+                                              "tokenName": "ARRAY_DECLARATOR"
+                                            }
+                                          ]
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            },
+                            {
+                              "tokenType": 117,
+                              "tokenName": "BLOCK_SCOPE",
+                              "children": [
+                                {
+                                  "tokenType": 160,
+                                  "tokenName": "VAR_DECLARATION",
+                                  "children": [
+                                    {
+                                      "tokenType": 142,
+                                      "tokenName": "LOCAL_MODIFIER_LIST"
+                                    },
+                                    {
+                                      "tokenType": 157,
+                                      "tokenName": "TYPE",
+                                      "children": [
+                                        {
+                                          "tokenType": 79,
+                                          "tokenName": "int"
+                                        }
+                                      ]
+                                    },
+                                    {
+                                      "tokenType": 162,
+                                      "tokenName": "VAR_DECLARATOR_LIST",
+                                      "children": [
+                                        {
+                                          "tokenType": 161,
+                                          "tokenName": "VAR_DECLARATOR",
+                                          "children": [
+                                            {
+                                              "tokenType": 164,
+                                              "tokenName": "x"
+                                            },
+                                            {
+                                              "tokenType": 126,
+                                              "tokenName": "EXPR",
+                                              "children": [
+                                                {
+                                                  "tokenType": 167,
+                                                  "tokenName": "10"
+                                                }
+                                              ]
+                                            }
+                                          ]
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        ]
+      }
+    ]
+  }
