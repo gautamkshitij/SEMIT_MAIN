@@ -1,0 +1,18 @@
+{
+  "files": [{
+    "repository": "git",
+    "configFiles": [{
+      "fileName": "pom.xml",
+      "absFilePath": "/projectName/abc/a/v/b/pom.xml",
+      "fileExtension": "xml",
+      "FileSize": "1MB",
+      "linesOfCode": "100",
+      "config_code": {
+        "test": {
+          "attrib": "moretest",
+          "content": "Turn this to JSON"
+        }
+      }
+    }]
+  }]
+}

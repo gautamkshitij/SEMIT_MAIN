@@ -1,0 +1,17 @@
+{
+  "files": [
+    {
+      "repository": "git",
+      "sourceCode": [
+        {
+          "fileName": "HelloWorld.java",
+          "absFilePath": "/projectName/abc/a/v/b/HelloWorld.java",
+          "fileExtension": "java",
+          "fileSize": "1MB",
+          "linesOfCode": 100,
+          "code_json": ""
+        }
+      ]
+    }
+  ]
+}
