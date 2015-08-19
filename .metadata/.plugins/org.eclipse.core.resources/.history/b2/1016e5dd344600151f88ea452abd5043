@@ -1,0 +1,50 @@
+package uic.semit.Project.ProjectData.sourceCodeJSON;
+
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.DirectoryStream;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.List;
+
+public class FetchSourceFiles {
+
+	public static SourceFiles getSourceFiles(String projectName) {
+		String ProjectPath = "/Users/kshitijgautam/Google\\ Drive/Coding/workspace/SEMIT_MAIN/DATA/CODE/"
+				+ projectName;
+		System.out.println(ProjectPath);
+		System.out.println(getAllFileswithExtension("java", ProjectPath));
+		return null;
+
+	}
+
+	public static List<File> getAllFileswithExtension(String extension,
+			String path) {
+		Path dir = Paths.get(path);
+		List<File> files = new ArrayList<>();
+		try (DirectoryStream<Path> stream = Files.newDirectoryStream(dir, "*.{"
+				+ extension.toLowerCase().trim() + "}")) {
+			for (Path entry : stream) {
+				files.add(entry.toFile());
+			}
+
+		} catch (IOException x) {
+			throw new RuntimeException(String.format(
+					"error reading folder %s: %s", dir, x.getMessage()), x);
+		}
+		return files;
+
+	}
+
+	public static void main(String[] args) {
+
+		System.out.println(FetchSourceFiles.getSourceFiles("jjicalc")
+				.toString());
+		System.out.println(FetchSourceFiles.getSourceFiles("cachier")
+				.toString());
+		System.out.println(FetchSourceFiles.getSourceFiles("smyle").toString());
+	}
+
+}

@@ -9,16 +9,15 @@ import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
 import org.apache.commons.lang.builder.ToStringBuilder;
 
-import uic.semit.Project.SourceCodeDownloading.CodeFile;
+import uic.semit.Project.ProjectData.sourceCodeJSON.SourceFiles;
 
 @Generated("org.jsonschema2pojo")
-public class Project
-{
+public class Project {
 
 	private String projectName; // project name from input file
 	private String projectURL; // http://sourceforge.net/projects/[project-name]/
 	private String projectrestAPIURL; // http://sourceforge.net/rest/p/[project-name]/
-	private String Id;
+	private String sourceForgeId;
 	private String creationDate;
 	private String externalHomepage;
 	private String iconUrl;
@@ -34,7 +33,7 @@ public class Project
 	private String url;
 	private String videoUrl;
 
-	private List<CodeFile> codeFiles = new ArrayList<CodeFile>();
+	private SourceFiles sourcefiles;
 
 	private List<Developer> developers = new ArrayList<Developer>();
 	private List<Tool> tools = new ArrayList<Tool>();
@@ -43,46 +42,45 @@ public class Project
 	private List<String> labels = new ArrayList<String>();
 	private Categories categories;
 
-	public Project(String projectName)
-	{
+	public Project(String projectName) {
 		this.projectName = projectName;
 		this.projectURL = "http://sourceforge.net/projects/" + projectName;
 		this.projectrestAPIURL = "ttp://sourceforge.net/rest/p/" + projectName;
 
 	}
 
-	public List<CodeFile> getCodeFiles()
-	{
-		return codeFiles;
-	}
-
-	public void setCodeFiles(List<CodeFile> codeFiles)
-	{
-		this.codeFiles = codeFiles;
+	/**
+	 * @return the sourceForgeId
+	 */
+	public String getSourceForgeId() {
+		return sourceForgeId;
 	}
 
 	/**
-	 * 
-	 * @return The Id
+	 * @param sourceForgeId
+	 *            the sourceForgeId to set
 	 */
-	public String getId()
-	{
-		return Id;
+	public void setSourceForgeId(String sourceForgeId) {
+		this.sourceForgeId = sourceForgeId;
 	}
 
 	/**
-	 * 
-	 * @param Id
-	 *            The _id
+	 * @return the sourcefiles
 	 */
-	public void setId(String Id)
-	{
-		this.Id = Id;
+	public SourceFiles getSourcefiles() {
+		return sourcefiles;
 	}
 
-	public Project withId(String Id)
-	{
-		this.Id = Id;
+	/**
+	 * @param sourcefiles
+	 *            the sourcefiles to set
+	 */
+	public void setSourcefiles(SourceFiles sourcefiles) {
+		this.sourcefiles = sourcefiles;
+	}
+
+	public Project withSourceForgeId(String Id) {
+		this.sourceForgeId = Id;
 		return this;
 	}
 
@@ -90,8 +88,7 @@ public class Project
 	 * 
 	 * @return The categories
 	 */
-	public Categories getCategories()
-	{
+	public Categories getCategories() {
 		return categories;
 	}
 
@@ -100,13 +97,11 @@ public class Project
 	 * @param categories
 	 *            The categories
 	 */
-	public void setCategories(Categories categories)
-	{
+	public void setCategories(Categories categories) {
 		this.categories = categories;
 	}
 
-	public Project withCategories(Categories categories)
-	{
+	public Project withCategories(Categories categories) {
 		this.categories = categories;
 		return this;
 	}
@@ -115,8 +110,7 @@ public class Project
 	 * 
 	 * @return The creationDate
 	 */
-	public String getCreationDate()
-	{
+	public String getCreationDate() {
 		return creationDate;
 	}
 
@@ -125,13 +119,11 @@ public class Project
 	 * @param creationDate
 	 *            The creation_date
 	 */
-	public void setCreationDate(String creationDate)
-	{
+	public void setCreationDate(String creationDate) {
 		this.creationDate = creationDate;
 	}
 
-	public Project withCreationDate(String creationDate)
-	{
+	public Project withCreationDate(String creationDate) {
 		this.creationDate = creationDate;
 		return this;
 	}
@@ -140,8 +132,7 @@ public class Project
 	 * 
 	 * @return The developers
 	 */
-	public List<Developer> getDevelopers()
-	{
+	public List<Developer> getDevelopers() {
 		return developers;
 	}
 
@@ -150,13 +141,11 @@ public class Project
 	 * @param developers
 	 *            The developers
 	 */
-	public void setDevelopers(List<Developer> developers)
-	{
+	public void setDevelopers(List<Developer> developers) {
 		this.developers = developers;
 	}
 
-	public Project withDevelopers(List<Developer> developers)
-	{
+	public Project withDevelopers(List<Developer> developers) {
 		this.developers = developers;
 		return this;
 	}
@@ -165,8 +154,7 @@ public class Project
 	 * 
 	 * @return The externalHomepage
 	 */
-	public String getExternalHomepage()
-	{
+	public String getExternalHomepage() {
 		return externalHomepage;
 	}
 
@@ -175,13 +163,11 @@ public class Project
 	 * @param externalHomepage
 	 *            The external_homepage
 	 */
-	public void setExternalHomepage(String externalHomepage)
-	{
+	public void setExternalHomepage(String externalHomepage) {
 		this.externalHomepage = externalHomepage;
 	}
 
-	public Project withExternalHomepage(String externalHomepage)
-	{
+	public Project withExternalHomepage(String externalHomepage) {
 		this.externalHomepage = externalHomepage;
 		return this;
 	}
@@ -190,8 +176,7 @@ public class Project
 	 * 
 	 * @return The iconUrl
 	 */
-	public String getIconUrl()
-	{
+	public String getIconUrl() {
 		return iconUrl;
 	}
 
@@ -200,13 +185,11 @@ public class Project
 	 * @param iconUrl
 	 *            The icon_url
 	 */
-	public void setIconUrl(String iconUrl)
-	{
+	public void setIconUrl(String iconUrl) {
 		this.iconUrl = iconUrl;
 	}
 
-	public Project withIconUrl(String iconUrl)
-	{
+	public Project withIconUrl(String iconUrl) {
 		this.iconUrl = iconUrl;
 		return this;
 	}
@@ -215,8 +198,7 @@ public class Project
 	 * 
 	 * @return The labels
 	 */
-	public List<String> getLabels()
-	{
+	public List<String> getLabels() {
 		return labels;
 	}
 
@@ -225,13 +207,11 @@ public class Project
 	 * @param labels
 	 *            The labels
 	 */
-	public void setLabels(List<String> labels)
-	{
+	public void setLabels(List<String> labels) {
 		this.labels = labels;
 	}
 
-	public Project withLabels(List<String> labels)
-	{
+	public Project withLabels(List<String> labels) {
 		this.labels = labels;
 		return this;
 	}
@@ -240,8 +220,7 @@ public class Project
 	 * 
 	 * @return The movedToUrl
 	 */
-	public String getMovedToUrl()
-	{
+	public String getMovedToUrl() {
 		return movedToUrl;
 	}
 
@@ -250,13 +229,11 @@ public class Project
 	 * @param movedToUrl
 	 *            The moved_to_url
 	 */
-	public void setMovedToUrl(String movedToUrl)
-	{
+	public void setMovedToUrl(String movedToUrl) {
 		this.movedToUrl = movedToUrl;
 	}
 
-	public Project withMovedToUrl(String movedToUrl)
-	{
+	public Project withMovedToUrl(String movedToUrl) {
 		this.movedToUrl = movedToUrl;
 		return this;
 	}
@@ -265,8 +242,7 @@ public class Project
 	 * 
 	 * @return The name
 	 */
-	public String getName()
-	{
+	public String getName() {
 		return name;
 	}
 
@@ -275,13 +251,11 @@ public class Project
 	 * @param name
 	 *            The name
 	 */
-	public void setName(String name)
-	{
+	public void setName(String name) {
 		this.name = name;
 	}
 
-	public Project withName(String name)
-	{
+	public Project withName(String name) {
 		this.name = name;
 		return this;
 	}
@@ -290,8 +264,7 @@ public class Project
 	 * 
 	 * @return The preferredSupportTool
 	 */
-	public String getPreferredSupportTool()
-	{
+	public String getPreferredSupportTool() {
 		return preferredSupportTool;
 	}
 
@@ -300,13 +273,11 @@ public class Project
 	 * @param preferredSupportTool
 	 *            The preferred_support_tool
 	 */
-	public void setPreferredSupportTool(String preferredSupportTool)
-	{
+	public void setPreferredSupportTool(String preferredSupportTool) {
 		this.preferredSupportTool = preferredSupportTool;
 	}
 
-	public Project withPreferredSupportTool(String preferredSupportTool)
-	{
+	public Project withPreferredSupportTool(String preferredSupportTool) {
 		this.preferredSupportTool = preferredSupportTool;
 		return this;
 	}
@@ -315,8 +286,7 @@ public class Project
 	 * 
 	 * @return The preferredSupportUrl
 	 */
-	public String getPreferredSupportUrl()
-	{
+	public String getPreferredSupportUrl() {
 		return preferredSupportUrl;
 	}
 
@@ -325,13 +295,11 @@ public class Project
 	 * @param preferredSupportUrl
 	 *            The preferred_support_url
 	 */
-	public void setPreferredSupportUrl(String preferredSupportUrl)
-	{
+	public void setPreferredSupportUrl(String preferredSupportUrl) {
 		this.preferredSupportUrl = preferredSupportUrl;
 	}
 
-	public Project withPreferredSupportUrl(String preferredSupportUrl)
-	{
+	public Project withPreferredSupportUrl(String preferredSupportUrl) {
 		this.preferredSupportUrl = preferredSupportUrl;
 		return this;
 	}
@@ -340,8 +308,7 @@ public class Project
 	 * 
 	 * @return The _private
 	 */
-	public boolean isPrivate()
-	{
+	public boolean isPrivate() {
 		return _private;
 	}
 
@@ -350,13 +317,11 @@ public class Project
 	 * @param _private
 	 *            The private
 	 */
-	public void setPrivate(boolean _private)
-	{
+	public void setPrivate(boolean _private) {
 		this._private = _private;
 	}
 
-	public Project withPrivate(boolean _private)
-	{
+	public Project withPrivate(boolean _private) {
 		this._private = _private;
 		return this;
 	}
@@ -365,8 +330,7 @@ public class Project
 	 * 
 	 * @return The screenshots
 	 */
-	public List<Screenshot> getScreenshots()
-	{
+	public List<Screenshot> getScreenshots() {
 		return screenshots;
 	}
 
@@ -375,13 +339,11 @@ public class Project
 	 * @param screenshots
 	 *            The screenshots
 	 */
-	public void setScreenshots(List<Screenshot> screenshots)
-	{
+	public void setScreenshots(List<Screenshot> screenshots) {
 		this.screenshots = screenshots;
 	}
 
-	public Project withScreenshots(List<Screenshot> screenshots)
-	{
+	public Project withScreenshots(List<Screenshot> screenshots) {
 		this.screenshots = screenshots;
 		return this;
 	}
@@ -390,8 +352,7 @@ public class Project
 	 * 
 	 * @return The shortDescription
 	 */
-	public String getShortDescription()
-	{
+	public String getShortDescription() {
 		return shortDescription;
 	}
 
@@ -400,13 +361,11 @@ public class Project
 	 * @param shortDescription
 	 *            The short_description
 	 */
-	public void setShortDescription(String shortDescription)
-	{
+	public void setShortDescription(String shortDescription) {
 		this.shortDescription = shortDescription;
 	}
 
-	public Project withShortDescription(String shortDescription)
-	{
+	public Project withShortDescription(String shortDescription) {
 		this.shortDescription = shortDescription;
 		return this;
 	}
@@ -415,8 +374,7 @@ public class Project
 	 * 
 	 * @return The shortname
 	 */
-	public String getShortname()
-	{
+	public String getShortname() {
 		return shortname;
 	}
 
@@ -425,13 +383,11 @@ public class Project
 	 * @param shortname
 	 *            The shortname
 	 */
-	public void setShortname(String shortname)
-	{
+	public void setShortname(String shortname) {
 		this.shortname = shortname;
 	}
 
-	public Project withShortname(String shortname)
-	{
+	public Project withShortname(String shortname) {
 		this.shortname = shortname;
 		return this;
 	}
@@ -440,8 +396,7 @@ public class Project
 	 * 
 	 * @return The socialnetworks
 	 */
-	public List<Socialnetwork> getSocialnetworks()
-	{
+	public List<Socialnetwork> getSocialnetworks() {
 		return socialnetworks;
 	}
 
@@ -450,13 +405,11 @@ public class Project
 	 * @param socialnetworks
 	 *            The socialnetworks
 	 */
-	public void setSocialnetworks(List<Socialnetwork> socialnetworks)
-	{
+	public void setSocialnetworks(List<Socialnetwork> socialnetworks) {
 		this.socialnetworks = socialnetworks;
 	}
 
-	public Project withSocialnetworks(List<Socialnetwork> socialnetworks)
-	{
+	public Project withSocialnetworks(List<Socialnetwork> socialnetworks) {
 		this.socialnetworks = socialnetworks;
 		return this;
 	}
@@ -465,8 +418,7 @@ public class Project
 	 * 
 	 * @return The status
 	 */
-	public String getStatus()
-	{
+	public String getStatus() {
 		return status;
 	}
 
@@ -475,13 +427,11 @@ public class Project
 	 * @param status
 	 *            The status
 	 */
-	public void setStatus(String status)
-	{
+	public void setStatus(String status) {
 		this.status = status;
 	}
 
-	public Project withStatus(String status)
-	{
+	public Project withStatus(String status) {
 		this.status = status;
 		return this;
 	}
@@ -490,8 +440,7 @@ public class Project
 	 * 
 	 * @return The summary
 	 */
-	public String getSummary()
-	{
+	public String getSummary() {
 		return summary;
 	}
 
@@ -500,13 +449,11 @@ public class Project
 	 * @param summary
 	 *            The summary
 	 */
-	public void setSummary(String summary)
-	{
+	public void setSummary(String summary) {
 		this.summary = summary;
 	}
 
-	public Project withSummary(String summary)
-	{
+	public Project withSummary(String summary) {
 		this.summary = summary;
 		return this;
 	}
@@ -515,8 +462,7 @@ public class Project
 	 * 
 	 * @return The tools
 	 */
-	public List<Tool> getTools()
-	{
+	public List<Tool> getTools() {
 		return tools;
 	}
 
@@ -525,13 +471,11 @@ public class Project
 	 * @param tools
 	 *            The tools
 	 */
-	public void setTools(List<Tool> tools)
-	{
+	public void setTools(List<Tool> tools) {
 		this.tools = tools;
 	}
 
-	public Project withTools(List<Tool> tools)
-	{
+	public Project withTools(List<Tool> tools) {
 		this.tools = tools;
 		return this;
 	}
@@ -540,8 +484,7 @@ public class Project
 	 * 
 	 * @return The url
 	 */
-	public String getUrl()
-	{
+	public String getUrl() {
 		return url;
 	}
 
@@ -550,13 +493,11 @@ public class Project
 	 * @param url
 	 *            The url
 	 */
-	public void setUrl(String url)
-	{
+	public void setUrl(String url) {
 		this.url = url;
 	}
 
-	public Project withUrl(String url)
-	{
+	public Project withUrl(String url) {
 		this.url = url;
 		return this;
 	}
@@ -565,8 +506,7 @@ public class Project
 	 * 
 	 * @return The videoUrl
 	 */
-	public String getVideoUrl()
-	{
+	public String getVideoUrl() {
 		return videoUrl;
 	}
 
@@ -575,27 +515,23 @@ public class Project
 	 * @param videoUrl
 	 *            The video_url
 	 */
-	public void setVideoUrl(String videoUrl)
-	{
+	public void setVideoUrl(String videoUrl) {
 		this.videoUrl = videoUrl;
 	}
 
-	public Project withVideoUrl(String videoUrl)
-	{
+	public Project withVideoUrl(String videoUrl) {
 		this.videoUrl = videoUrl;
 		return this;
 	}
 
 	@Override
-	public String toString()
-	{
+	public String toString() {
 		return ToStringBuilder.reflectionToString(this);
 	}
 
 	@Override
-	public int hashCode()
-	{
-		return new HashCodeBuilder().append(Id).append(categories)
+	public int hashCode() {
+		return new HashCodeBuilder().append(sourceForgeId).append(categories)
 				.append(creationDate).append(developers)
 				.append(externalHomepage).append(iconUrl).append(labels)
 				.append(movedToUrl).append(name).append(preferredSupportTool)
@@ -606,12 +542,15 @@ public class Project
 	}
 
 	@Override
-	public boolean equals(Object other)
-	{
-		if (other == this) { return true; }
-		if ((other instanceof Project) == false) { return false; }
+	public boolean equals(Object other) {
+		if (other == this) {
+			return true;
+		}
+		if ((other instanceof Project) == false) {
+			return false;
+		}
 		Project rhs = ((Project) other);
-		return new EqualsBuilder().append(Id, rhs.Id)
+		return new EqualsBuilder().append(sourceForgeId, rhs.sourceForgeId)
 				.append(categories, rhs.categories)
 				.append(creationDate, rhs.creationDate)
 				.append(developers, rhs.developers)

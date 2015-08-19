@@ -1,0 +1,157 @@
+<html>
+<head>
+<title>SMYLE: Generic Java</title>
+</head>
+<body bgcolor="#ffffff" text="#000000">
+<table>
+<tr>
+<td valign="top">
+<table>
+<tr>
+<td><a href="index.html"><img border="0" src="smyle_small.jpg"></a></td>
+</tr>
+<tr>
+<td><a href="index.html">Home</a></td>
+</tr>
+<tr>
+<td><a href="http://sourceforge.net/project/showfiles.php?group_id=34021">Download!</a></td>
+</tr>
+<tr>
+<td><a href="features.html">Features</a></td>
+</tr>
+<tr>
+<td><a href="benchmark.html">Benchmark</a></td>
+</tr>
+<tr>
+<td><a href="users.html">Users</a></td>
+</tr>
+<tr>
+<td><a href="gettingstarted.html">Getting started</a></td>
+</tr>
+<tr>
+<td><a href="concepts.html">Concepts</a></td>
+</tr>
+<tr>
+<td><a href="data_types.html">Data types</a></td>
+</tr>
+<tr>
+<td><a href="javaapi/index.html">API (Java)</a></td>
+</tr>
+<tr>
+<td><a href="gjapi/index.html">API (GJ)</a></td>
+</tr>
+<tr>
+<td><a href="idioms.html">Idioms</a></td>
+</tr>
+<tr>
+<td><a href="architecture.html">Architecture</a></td>
+</tr>
+<tr>
+<td><a href="performance.html">Performance Tips</a></td>
+</tr>
+<tr>
+<td><a href="idl.html">IDL Grammar</a></td>
+</tr>
+<tr>
+<td><a href="browser.html">Browser</a></td>
+</tr>
+<tr>
+<td><a href="schema_evolution.html">Schema evolution</a></td>
+</tr>
+<tr>
+<td><a href="gj.html">GJ (Generic Java)</a></td>
+</tr>
+<tr>
+<td><a href="limitations.html">Limitations</a></td>
+</tr>
+<tr>
+<td><a href="history.html">History</a></td>
+</tr>
+<tr>
+<td><a href="http://sourceforge.net/forum/forum.php?forum_id=106587">Help Forum</a></td>
+</tr>
+</table>
+</td><td width="20"></td><td valign="top">
+<h2>SMYLE: Generic Java</h2>
+  Smyle's "native" language is an extended form of Java called <i>Generic Java</i> (GJ).
+  <p>
+</p>
+  In most respects,
+  GJ absolutely identical to Java. The difference to Java, though, is an extended type system.
+  In GJ, class and interface
+  names can be <i>parameterized</i>. This is very useful for classes that work on data types they
+  don't know in advance.
+  <p>
+</p>
+  
+  A Vector, for example, can contain any kind of objects. But any particular Vector usually
+  contains instances of a specific class. In GJ, you can say <code><strong>Vector&lt;String&gt;</strong></code>
+  to indicate that a Vector holds Strings (and Strings only). The GJ compiler uses this
+  information to check for errors that would go undetected in plain Java. Code like this:
+  
+  <pre>
+    Vector&lt;String&gt; v = new Vector&lt;String&gt;();
+    v.add(new Integer(123));
+  </pre>
+
+  causes a compilation error.
+  <p>
+</p>
+  
+  Here's a GJ Mini FAQ:
+  <dl>
+<dd>
+<dl>
+    <dt>Where do I get the GJ compiler?<p>
+</p>
+</dt>
+    <dd>
+      It's included with the Smyle source and binary distributions. Or you can get it
+      <a href="http://www.research.avayalabs.com/user/wadler/gj/">here</a>.
+    <p>
+</p>
+</dd>
+    <dt>Can't I use normal Java instead?<p>
+</p>
+</dt>
+    <dd>
+      Absolutely! Even though Smyle is based on GJ, you don't have to get in touch with
+      GJ unless you deliberately decide to do so.<br>
+      The Smyle IDL compiler generates GJ sources as well as regular Java class files.
+      If you don't want to use GJ, you can just use the class files and ignore the sources.<p>
+</p>
+    <p>
+</p>
+</dd>
+    <dt>I've never heard of GJ before. Is anybody else in the world using this?<p>
+</p>
+</dt>
+    <dd>
+      Well, actually I don't know. What I do know is that GJ is to be
+      <a href="http://developer.java.sun.com/developer/earlyAccess/adding_generics/">integrated</a> in JDK 1.5.
+      I also know that it's a real pleasure to program in. Give it a chance, you might like it.
+    <p>
+</p>
+</dd>
+  </dl>
+</dd>
+</dl>
+</td>
+</tr>
+<tr>
+<td colspan="3">
+<hr>
+<table width="100%">
+<tr>
+<td>
+          Author: Stefan Reich (<a href="mailto:doc@drjava.de">doc@drjava.de</a>)<br>
+          Smyle Homepage: <a href="http://www.drjava.de/smyle/">www.drjava.de/smyle</a>
+<br>
+</td><td align="right"><A href="http://sourceforge.net"><IMG src="http://sourceforge.net/sflogo.php?group_id=34021" width="88" height="31" border="0" alt="SourceForge Logo"></A></td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+</body>
+</html>

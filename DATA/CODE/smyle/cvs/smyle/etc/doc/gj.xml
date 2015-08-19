@@ -1,0 +1,45 @@
+<document title="Generic Java">
+  Smyle's "native" language is an extended form of Java called <i>Generic Java</i> (GJ).
+  <p/>
+  In most respects,
+  GJ absolutely identical to Java. The difference to Java, though, is an extended type system.
+  In GJ, class and interface
+  names can be <i>parameterized</i>. This is very useful for classes that work on data types they
+  don't know in advance.
+  <p/>
+  
+  A Vector, for example, can contain any kind of objects. But any particular Vector usually
+  contains instances of a specific class. In GJ, you can say <code>Vector&lt;String&gt;</code>
+  to indicate that a Vector holds Strings (and Strings only). The GJ compiler uses this
+  information to check for errors that would go undetected in plain Java. Code like this:
+  
+  <codeblock>
+    Vector&lt;String&gt; v = new Vector&lt;String&gt;();
+    v.add(new Integer(123));
+  </codeblock>
+
+  causes a compilation error.
+  <p/>
+  
+  Here's a GJ Mini FAQ:
+  <faq>
+    <question>Where do I get the GJ compiler?</question>
+    <answer>
+      It's included with the Smyle source and binary distributions. Or you can get it
+      <a href="http://www.research.avayalabs.com/user/wadler/gj/">here</a>.
+    </answer>
+    <question>Can't I use normal Java instead?</question>
+    <answer>
+      Absolutely! Even though Smyle is based on GJ, you don't have to get in touch with
+      GJ unless you deliberately decide to do so.<br/>
+      The Smyle IDL compiler generates GJ sources as well as regular Java class files.
+      If you don't want to use GJ, you can just use the class files and ignore the sources.<p/>
+    </answer>
+    <question>I've never heard of GJ before. Is anybody else in the world using this?</question>
+    <answer>
+      Well, actually I don't know. What I do know is that GJ is to be
+      <a href="http://developer.java.sun.com/developer/earlyAccess/adding_generics/">integrated</a> in JDK 1.5.
+      I also know that it's a real pleasure to program in. Give it a chance, you might like it.
+    </answer>
+  </faq>
+</document>

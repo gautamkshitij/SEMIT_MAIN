@@ -1,0 +1,124 @@
+/*
+This source file is part of Smyle, a database library.
+For up-to-date information, see http://www.drjava.de/smyle
+Copyright (C) 2001 Stefan Reich (doc@drjava.de)
+
+This library is free software; you can redistribute it and/or
+modify it under the terms of the GNU Lesser General Public
+License as published by the Free Software Foundation; either
+version 2.1 of the License, or (at your option) any later version.
+
+This library is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+Lesser General Public License for more details.
+
+You should have received a copy of the GNU Lesser General Public
+License along with this library; if not, write to the Free Software
+Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+
+For full license text, see doc/license/lgpl.txt in this distribution
+*/
+
+struct Person {
+  string name;
+  long age;
+}
+
+struct ExtendedPerson {
+  string name;
+  long age;
+  long gender;
+}
+
+struct VeryExtendedPerson {
+  string title;
+  string name;
+  sequence<string> degrees;
+  long age;
+  boolean married;
+  long gender;
+}
+
+struct Song {
+  string artist;
+  string title;
+}
+
+struct Nested {
+  Person person;
+  string something;
+}
+
+struct NestedX {
+  ExtendedPerson person;
+  string something;
+}
+
+struct JustName {
+  string name;
+}
+
+// tests if code generated for all data types is compilable
+struct DataTypes {
+  boolean b;
+  long l;
+  long long ll;
+  string s;
+  JustName strct;
+  // not yet supported: sequence<boolean> booleans;
+  sequence<byte> bytes;
+  sequence<long> longs;
+  // not yet supported: sequence<long long> longlongs;
+  sequence<string> strings;
+  sequence<JustName> structs;
+}
+
+struct ReorderedDataTypes {
+  sequence<JustName> structs;
+  sequence<string> strings;
+  // not yet supported: sequence<long long> longlongs;
+  sequence<long> longs;
+  sequence<byte> bytes;
+  // not yet supported: sequence<boolean> booleans;
+  JustName strct;
+  string s;
+  long long ll;
+  long l;
+  boolean b;
+}
+
+struct NestedDataTypes {
+  DataTypes nested;
+}
+
+struct WrappedString {
+  string value;
+}
+
+struct StressRecord {
+  string key1;
+  long key2;
+  long value;
+}
+
+struct AutoInc {
+  string name;
+  autoincrement long id;
+}
+
+store MyStore {
+  table<AutoInc> autoincs;
+}
+
+// recursive data type
+struct Recursive {
+  sequence<Recursive> rec;
+}
+
+// extended recursive data type
+struct RecursiveX {
+  string x;
+  sequence<RecursiveX> rec;
+}
+

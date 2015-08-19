@@ -1,0 +1,55 @@
+SMYLE - Storage that Makes Your Life Easier
+
+SMYLE ROADMAP
+-------------
+
+(TE=test written, OK=done, BU=buggy, 80=scheduled for 0.8)
+Feature codes: se=schema evolution, mp=multiple processes
+
+ - limit accessSequence size
+ - distil mailbox servlet example
+ - find a way to report exceptions in flusher thread
+ - compression
+ - reverse() must be set per field
+ - assert all table functions inform index advisor
+ - assert all table functions use index
+ - handle forgotten mutable snapshots (exception etc.)
+   - do gc after a specified time
+   - measure idle time (problem: change flag on entry/exit of every method)
+ - new relocation detection (add chunk sizes and compare with file size)
+ - can activeSnapshots vector overflow?
+ - snapshot state after exception?
+ - don't relocate small file if exactly one
+OK struct cloning constructors
+ - gc doesn't block read access
+BU deferred commit
+OK index on boolean
+OK multidimensional indexes
+ - se: lazy conversion?
+ - 0.2 conversion with writer ids enabled: what happens if files already exist?
+ - enable writer ids
+ - sequence of boolean, long long
+ - Snapshot.refresh
+ - more complex filters (lessThan, greaterThan)
+ - two-level and deeper nesting of f_... fields
+ - additional table methods
+ - multiple processes
+ - multiple versions of Smyle classes in same VM (loaded by different classloaders)
+ - XML export
+ - admin servlet/application
+ 
+new indexing system:
+OK write PrefixKeySetTest
+ - sorting over index
+ - concatDimensions: assure fixed size for every part (needed for sorting)
+ - add if-indexable tests where necessary (e.g. profile creation)
+[- implement shortcuts]
+
+For 0.9:
+ - byte
+ - float, double
+ - sequence of boolean
+ - sequence of byte
+ - sequence of float, double
+ - sequence of long long
+ - rename long long to long, long to int?

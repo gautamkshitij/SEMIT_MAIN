@@ -1,0 +1,29 @@
+<document title="IDL Grammar">
+  The structure of a Smyle IDL file must conform to the following context-free grammar:
+  <p/>
+
+  <codeblock>
+    IDLFile ::= (Struct | Store)*
+
+    Struct ::= "struct" Identifier "{" Field* "}" [";"]
+
+    Field ::= ["autoincrement"] Type Identifier ";"
+
+    Type ::= "string"           // translated to java.lang.String
+           | "boolean"          // translated to boolean
+           | "byte"             // translated to byte
+           | "long"             // translated to int
+           | "long long"        // translated to long
+           | Identifier         // name of a struct
+           | "sequence&lt;string>" // translated to java.util.ArrayList
+           | "sequence&lt;byte>"   // translated to org.artsProject.util.ByteVector
+           | "sequence&lt;long>"   // translated to org.artsProject.util.IntVector
+           | "sequence&lt;"        // sequence of structs,
+               Identifier ">"   // translated to java.util.ArrayList
+
+    Store ::= "store" Identifier " {" Table* "}" [";"]
+
+    Table ::= "table&lt;" Identifier ">" Identifier ";"
+  </codeblock>
+</document>
+

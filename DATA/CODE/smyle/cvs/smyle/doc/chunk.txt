@@ -1,0 +1,17 @@
+ChunkManager Design Questions
+-----------------------------
+
+* Handles+central chunk table rather than direct references?
+
+  Handles:
+  + chunk refs fit into 32 bit
+  - table takes up space (64+32+32 bit per chunk, file/offset/length)
+  - creating a chunk involves an additional (collapsable) write to chunk table
+  Direct refs:
+  - more than one pointer may need to be changed when moving a chunk (which happens often)
+  - snapshot/table classes need code to update chunk pointers; can easily be inefficient too
+    (has to scan large FileRef tables)
+  - chunk refs might not even fit into 64 bit
+  
+  ==> Result of evaluation: Handles are the way to go!
+

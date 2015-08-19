@@ -1,0 +1,64 @@
+<document title="Performance Tips">
+  <h>Record Storage</h>
+  
+  Smyle always loads and stores an individual records at once. You should keep this in mind when you
+  store large strings, byte arrays or nested sequences. For example, suppose this definition:
+  
+  <codeblock>
+    struct BLOB {
+      long id;
+      string name;
+      sequence&lt;byte&gt; hugeData;
+    }
+  </codeblock>
+  
+  If you execute:
+  
+  <codeblock>
+    Table blobs = snapshot.getTable("blobs", BLOB.getTypeInfo());
+    Map names = blobs.getUniqueValueCounts(name);
+  </codeblock>
+  
+  all the hugeData arrays will be read from disk (and discarded immediately). This might be improved in
+  a future Smyle version.
+  <p/>
+  
+  <h>Memory Usage</h>
+  
+  If you're using Smyle to manage a non-trivial database, you might get the impression that it
+  consumes a large amount of RAM.
+  <p/>
+  
+  The truth is, Smyle tries to hold as much data in RAM as possible. It can even use more memory for
+  caching than the whole store occupies on disk. However, almost all the cache structures are held via
+  <i>weak references</i>. This means, as soon as the VM runs out of memory (for example, because other
+  parts of your application need memory), it will start to dispose of the cached data - up to the point
+  where it frees all of it.
+  <p/>
+  
+  So the way to limit Smyle's memory usage is to limit the size of your VM via the -mx option:
+  <p/>
+  
+  <codeblock>
+    java -ms32m -mx64m MySmyleBasedApplication
+  </codeblock>
+  
+  I am planning an option that limits Smyle's memory usage independently of the VM size; and a
+  mechanism that frees the buffers when the database hasn't been used for some time.
+  <p/>
+  
+  <h>Filesystem (Non-)Issues</h>
+  
+  Smyle stores tend to consist of a large number of small files. Smyle tries to arrange the data such that
+  every file approaches 64 KB, but doesn't exceed that size. Sometimes this rule is violated though (for
+  example, every record is stored in one piece, so large records lead to large files).
+  <p/>
+  
+  All the files are kept in one directory, so I wondered how scalable this organisation is. I wrote a test
+  script that simulated a large Smyle store (using the actual Smyle file system access layer).
+  It turned out that both Linux (ext2fs) and Windows 2000 (NTFS) are easily able to handle 10,000 files per
+  directory. This translates into a 640MB Smyle store - a dimension where Smyle probably runs into
+  a bunch of other performance problems anyway.
+  <p/>
+  
+</document>

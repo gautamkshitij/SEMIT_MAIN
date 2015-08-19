@@ -1,0 +1,68 @@
+<document title="3rd Party Code" home="../">
+  This distribution of Smyle contains snippets of 3rd party code (some in source, some in binary form).
+  That code is covered under the following licenses:
+  <p/>
+  
+  <table>
+  <tr><th>File</th><th>Description</th><th>License</th><th>Homepage</th></tr>
+  <tr>
+    <td>etc/jmcop_src_raw.jar</td>
+    <td>jMCOP (recent CVS)</td>
+    <td><a href="License-jmcop.txt">LGPL</a></td>
+    <td>http://projects.sf.net/jmcop</td>
+  </tr>
+  <tr>
+    <td>lib/ant.jar, lib/ant_optional.jar</td>
+    <td>Jakarta Ant 1.3, modified</td>
+    <td><a href="License-ant.txt">Apache Software License</a></td>
+    <td>http://jakarta.apache.org/ant</td>
+  </tr>
+  <tr>
+    <td>lib/ant_jaxp.jar, lib/ant_parser.jar</td>
+    <td>Java API for XML Processing</td>
+    <td>The software in the packages javax.xml.parsers and javax.xml.transform is covered by the
+    <a href="License-RI.html">JAXP Reference Implementation License</a>.
+    The software under the package hierarchies beginning with org.w3c.dom is covered by the
+    <a href="License-W3C.html">W3C Software License</a>.
+    All of the remaining software in this distribution is covered by the
+    <a href="License-ASF.txt">Apache Software License</a>.</td>
+    <td>http://java.sun.com/xml/xml_jaxp.html</td>
+  </tr>
+  <tr>
+    <td>lib/ant_gjc.jar</td>
+    <td>The GJ Compiler</td>
+    <td><a href="License-gj.html">Custom license</a></td>
+    <td>http://www.research.avayalabs.com/user/wadler/pizza/gj/</td>
+  </tr>
+  <tr>
+    <td>lib/ant_gjdoc.jar</td>
+    <td>gjdoc (javadoc replacement for GJ), slightly modified</td>
+    <td><a href="License-gjdoc.html">Custom license</a></td>
+    <td>http://www.owlnet.rice.edu/~bogart/gjdocpage.html</td>
+  </tr>
+  <tr>
+    <td>lib/junit37.jar</td>
+    <td>JUnit 3.7</td>
+    <td><a href="License-junit.html">Custom license</a></td>
+    <td>http://www.junit.org</td>
+  </tr>
+  <tr>
+    <td>lib/gi09.jar</td>
+    <td>The Generic Interpreter</td>
+    <td><a href="gpl.txt">GPL</a></td>
+    <td>http://www.csupomona.edu/~carich/gi/</td>
+  </tr>
+  <tr>
+    <td>src/gnu/*</td>
+    <td>GNU UTF8 encoder/decoder</td>
+    <td><a href="gpl.txt">GPL</a></td>
+    <td>http://www.classpath.org/</td>
+  </tr>
+  <tr>
+    <td>src/com/go/*</td>
+    <td>Trove</td>
+    <td><a href="License-trove.txt">Tea Software License</a></td>
+    <td>http://opensource.go.com/</td>
+  </tr>
+  </table>
+</document>

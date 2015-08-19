@@ -1,0 +1,272 @@
+<html>
+<head>
+<title>SMYLE: Idioms</title>
+</head>
+<body bgcolor="#ffffff" text="#000000">
+<table>
+<tr>
+<td valign="top">
+<table>
+<tr>
+<td><a href="index.html"><img border="0" src="smyle_small.jpg"></a></td>
+</tr>
+<tr>
+<td><a href="index.html">Home</a></td>
+</tr>
+<tr>
+<td><a href="http://sourceforge.net/project/showfiles.php?group_id=34021">Download!</a></td>
+</tr>
+<tr>
+<td><a href="features.html">Features</a></td>
+</tr>
+<tr>
+<td><a href="benchmark.html">Benchmark</a></td>
+</tr>
+<tr>
+<td><a href="users.html">Users</a></td>
+</tr>
+<tr>
+<td><a href="gettingstarted.html">Getting started</a></td>
+</tr>
+<tr>
+<td><a href="concepts.html">Concepts</a></td>
+</tr>
+<tr>
+<td><a href="data_types.html">Data types</a></td>
+</tr>
+<tr>
+<td><a href="javaapi/index.html">API (Java)</a></td>
+</tr>
+<tr>
+<td><a href="gjapi/index.html">API (GJ)</a></td>
+</tr>
+<tr>
+<td><a href="idioms.html">Idioms</a></td>
+</tr>
+<tr>
+<td><a href="architecture.html">Architecture</a></td>
+</tr>
+<tr>
+<td><a href="performance.html">Performance Tips</a></td>
+</tr>
+<tr>
+<td><a href="idl.html">IDL Grammar</a></td>
+</tr>
+<tr>
+<td><a href="browser.html">Browser</a></td>
+</tr>
+<tr>
+<td><a href="schema_evolution.html">Schema evolution</a></td>
+</tr>
+<tr>
+<td><a href="gj.html">GJ (Generic Java)</a></td>
+</tr>
+<tr>
+<td><a href="limitations.html">Limitations</a></td>
+</tr>
+<tr>
+<td><a href="history.html">History</a></td>
+</tr>
+<tr>
+<td><a href="http://sourceforge.net/forum/forum.php?forum_id=106587">Help Forum</a></td>
+</tr>
+</table>
+</td><td width="20"></td><td valign="top">
+<h2>SMYLE: Idioms</h2>
+  This document shows typical code fragments that give you an idea
+  about how to use Smyle.
+  <p>
+</p>
+  
+  <h3>Startup and shutdown</h3>
+  
+  You will usually want to open a Smyle store when your application starts up
+  and close the Store when it shuts down. (Theoretically, you could also open it
+  before every transaction and close it again afterwards, but that would be very
+  inefficient.)
+
+  This is how you open the store:
+  <pre>
+    Store store = Smyle.openStore("storeDirectory");
+  </pre>
+  
+  Or, if you defined a store named "MyStore" in your IDL file:
+  
+  <pre>
+    MyStore store = MyStore.open("storeDirectory");
+  </pre>
+
+  And this is how you close the store:
+  <pre>
+    store.close();
+  </pre>
+
+  (<code><strong>storeDirectory</strong></code> is the name of the directory the store resides in.)
+  Very easy, as you can see. A few more hints:
+
+  <ul>
+  <li>If Smyle doesn't find a store in the directory you specified,
+  it automatically creates one. It even creates the directory if necessary.</li>
+  <li>The directory is allowed to contain other files not related to Smyle. Smyle will not touch
+  any of them.</li>
+  <li>If the application terminates without closing the store, it won't do any harm to
+  the database. The only problem that can arise is that a lock file (storeDirectory/in-use.flag)
+  remains (whether this happens depends on VM, OS and how the application was terminated). 
+  In this case, you will have to delete that file before you can reopen the store.</li>
+  </ul>
+  
+  <p>
+</p>
+  
+  <h3>Read transactions</h3>
+
+  Read transactions are transactions that don't modify the database. They are performed on
+  an <i>immutable snapshot</i>. Here's an example:
+  <p>
+</p>
+
+  <pre>
+    Snapshot snapshot = store.snapshot();
+    Table persons = snapshot.getTable("persons", Person.getTypeInfo());
+    System.out.println("There are "+persons.size()+" persons in the database");
+    System.out.println("Their names in alphabetical order:");
+    for (Iterator i = persons.iterator(new Person_filter().orderByName()); i.hasNext(); )
+      System.out.println(((Person) i.next()).name);
+  </pre>
+
+  This example also demonstrates how you select a table and how you can iterate through its
+  elements.
+  <p>
+</p>
+
+  Immutable snapshots are very easy to handle because they don't require any cleanup. The
+  snapshot itself as well as all Table objects associated with it will be freed by the
+  garbage collector.
+  <p>
+</p>
+
+  <h3>Write transactions</h3>
+  
+  Write transactions are performed on <i>mutable snapshots</i> and are only slightly more
+  complicated than read transactions:
+  <p>
+</p>
+  
+  <pre>
+    Snapshot snapshot = store.mutableSnapshot();
+    try {
+      Table persons = snapshot.getTable("persons", Person.getTypeInfo());
+
+      // add Linda to database
+      persons.add(new Person("Linda", 33));
+
+      snapshot.commit(); // commit if everything went ok
+    } finally {
+      snapshot.forget(); // rollback in case of error
+    }
+  </pre>
+  
+  Both the commit() and forget() lines are absolutely essential. commit() causes
+  the changes you made to be written to disk and makes them visible to other clients.
+  forget() releases the write lock - without this, any subsequent attempts to begin
+  a write transaction will be blocked.
+  <p>
+</p>
+
+  <h3>Unique keys</h3>
+
+  Very often, the fields in a table can be separated in two groups: keys and values.
+  For example, in a table with this type:
+
+  <pre>
+    struct User {
+      string name;
+      long quota;
+      sequence&lt;string&gt; permissions;
+    }
+  </pre>
+
+  you would expect <i>name</i> to be the key field and <i>quota</i> and <i>permissions</i>
+  to be value fields.
+  <p>
+</p>
+
+  If your keys are unique (e.g., there are no two users with the same name), Smyle offers you
+  two functions, <i>get</i> and <i>put</i>, that make adding, retrieving and updating
+  records very easy:
+
+  <pre>
+    Table table = snapshot.getTable("users", User.getTypeInfo());
+
+    int getQuota(String username) {
+      User_filter filter = new User_filter().nameEquals(username);
+      User user = (User) table.get(filter);
+      if (user == null) throw new RuntimeException("No such user");
+      return user.quota;
+    }
+
+    void setQuota(String username, int quota) {
+      User_filter filter = new User_filter().nameEquals(username);
+      User user = (User) table.get(filter);
+      if (user == null) throw new RuntimeException("No such user");
+      table.put(filter, user.quota(quota));
+    }
+  </pre>
+
+  <h3>Unique keys plus automatic record creation</h3>
+
+  Some applications don't really need the notion of explicitely adding records. They rather
+  need an operation like "give me the record that matches criterion x, or create it if it
+  doesn't exist." Take for example:
+
+  <pre>
+    struct UserStats {
+      string name;
+      long logins;
+    }
+  </pre>
+
+  <i>logins</i> is supposed to count how often a certain user has logged in to date.
+  A user without a UserStats entry is semantically equivalent to a user with a UserStats
+  entry where <i>logins</i> == 0.
+  <p>
+</p>
+
+  In cases like this, where the default values you want are the same as Smyle's technical 
+  default values for fields (0 for integer fields, null for string fields), it makes sense
+  to use <i>getOrCreate</i> and <i>put</i>:
+
+  <pre>
+    Table table = snapshot.getTable("userstats", UserStats.getTypeInfo());
+
+    int getLogins(String username) {
+      UserStats_filter filter = new UserStats_filter().nameEquals(username);
+      return ((UserStats) table.getOrCreate(filter)).logins;
+    }
+
+    void recordLogin(String username) {
+      UserStats_filter filter = new UserStats_filter().nameEquals(username);
+      UserStats stats = (UserStats) table.getOrCreate(filter);
+      ++stats.logins;
+      table.put(filter, stats);
+    }
+  </pre>
+</td>
+</tr>
+<tr>
+<td colspan="3">
+<hr>
+<table width="100%">
+<tr>
+<td>
+          Author: Stefan Reich (<a href="mailto:doc@drjava.de">doc@drjava.de</a>)<br>
+          Smyle Homepage: <a href="http://www.drjava.de/smyle/">www.drjava.de/smyle</a>
+<br>
+</td><td align="right"><A href="http://sourceforge.net"><IMG src="http://sourceforge.net/sflogo.php?group_id=34021" width="88" height="31" border="0" alt="SourceForge Logo"></A></td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+</body>
+</html>

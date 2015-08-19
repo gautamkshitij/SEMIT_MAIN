@@ -1,0 +1,252 @@
+<html>
+<head>
+<title>SMYLE: Getting started</title>
+</head>
+<body bgcolor="#ffffff" text="#000000">
+<table>
+<tr>
+<td valign="top">
+<table>
+<tr>
+<td><a href="index.html"><img border="0" src="smyle_small.jpg"></a></td>
+</tr>
+<tr>
+<td><a href="index.html">Home</a></td>
+</tr>
+<tr>
+<td><a href="http://sourceforge.net/project/showfiles.php?group_id=34021">Download!</a></td>
+</tr>
+<tr>
+<td><a href="features.html">Features</a></td>
+</tr>
+<tr>
+<td><a href="benchmark.html">Benchmark</a></td>
+</tr>
+<tr>
+<td><a href="users.html">Users</a></td>
+</tr>
+<tr>
+<td><a href="gettingstarted.html">Getting started</a></td>
+</tr>
+<tr>
+<td><a href="concepts.html">Concepts</a></td>
+</tr>
+<tr>
+<td><a href="data_types.html">Data types</a></td>
+</tr>
+<tr>
+<td><a href="javaapi/index.html">API (Java)</a></td>
+</tr>
+<tr>
+<td><a href="gjapi/index.html">API (GJ)</a></td>
+</tr>
+<tr>
+<td><a href="idioms.html">Idioms</a></td>
+</tr>
+<tr>
+<td><a href="architecture.html">Architecture</a></td>
+</tr>
+<tr>
+<td><a href="performance.html">Performance Tips</a></td>
+</tr>
+<tr>
+<td><a href="idl.html">IDL Grammar</a></td>
+</tr>
+<tr>
+<td><a href="browser.html">Browser</a></td>
+</tr>
+<tr>
+<td><a href="schema_evolution.html">Schema evolution</a></td>
+</tr>
+<tr>
+<td><a href="gj.html">GJ (Generic Java)</a></td>
+</tr>
+<tr>
+<td><a href="limitations.html">Limitations</a></td>
+</tr>
+<tr>
+<td><a href="history.html">History</a></td>
+</tr>
+<tr>
+<td><a href="http://sourceforge.net/forum/forum.php?forum_id=106587">Help Forum</a></td>
+</tr>
+</table>
+</td><td width="20"></td><td valign="top">
+<h2>SMYLE: Getting started</h2>
+  To write your first Smyle-based application, this is what you need to do:
+  
+  <ol>
+    <li>Download Smyle</li>
+    <li>Add smyle.jar to classpath</li>
+    <li>Write an IDL file</li>
+    <li>Run the Smyle code generator</li>
+    <li>Write application code</li>
+  </ol>
+
+  You can always go back from step 5 to step 3 (modify/extend the IDL file and
+  recompile it) if necessary. The classes that Smyle generates are completely distinct from
+  the ones you write (although your classes will contain references to the generated ones), 
+  so there is no risk of Smyle overwriting any hand-written code.
+  <p>
+</p>
+
+  <h3>1. Download Smyle</h3>
+
+  On the download page, you have the choice between two distributions: <i>bin</i> (binary)
+  and <i>src</i> (source). Choose <i>bin</i>.
+  <p>
+</p>
+
+  After downloading, unpack the zip file in a directory of your choice. 
+  This will create a subdirectory named smyle-0.8.3 containing the Smyle library and 
+  some documentation.
+  <p>
+</p>
+  
+  <h3>2. Add smyle.jar to classpath</h3>
+
+  How you do this depends on your preferences and the IDE or development tools you're using.
+  Using a standard JDK, you would execute a command like this:
+
+  <pre>
+    export CLASSPATH=$CLASSPATH:/home/myself/smyle-0.8.3/build/smyle.jar  (Unix)
+    set CLASSPATH=%CLASSPATH%;\java\smyle-0.8.3\build\smyle.jar           (Windows)
+  </pre>
+
+  smyle.jar is needed in three different places:
+  
+  <ol>
+  <li>for running the code generator</li>
+  <li>while compiling your application</li>
+  <li>while running your application</li>
+  </ol>
+
+  For #3, you can also use a special, condensed version of smyle.jar called smyle_compact.jar
+  (it's in the same directory as smyle.jar).
+  When deploying your application, you will probably prefer smyle_compact.jar since it is 
+  smaller and uses less memory when executed.
+  <p>
+</p>
+
+  <h3>3. Write an IDL file</h3>
+
+  The IDL file is where you define the names and formats of the tables you want to use;
+  similar to the information you put in an SQL <i>create table</i> statement.
+  <p>
+</p>
+
+  Here's a small example:
+
+  <pre>
+    struct Car {
+      autoincrement long id;
+      string owner;
+      string model;
+      boolean washed;
+    }
+
+    store CarwashStore {
+      table&lt;Car&gt; cars;
+    }
+  </pre>
+
+  Save this as <i>carwash.idl</i> and you're ready for step three.
+  <p>
+</p>
+
+  Note that we didn't specify any key fields or indexes. With Smyle, you never have to
+  think about which fields need to be indexed (and in which order) - 
+  Smyle does this for you by analyzing the queries your application executes!
+  <p>
+</p>
+
+  <h3>4. Run the Smyle code generator</h3>
+
+  The Smyle code generator transforms your IDL file into a set of Java class files.
+  (It also generates sources, but these aren't compilable by an ordinary Java compiler.
+  It can be very instructive to have a look at them though.)
+  <p>
+</p>
+  
+  In the example, you would run the code generator by typing:
+
+  <pre>
+    java drjava.smyle.CodeGenerator carwash.idl carwash gensources classes
+  </pre>
+
+  This will generate sources in gensources/carwash and class files in classes/carwash. If
+  <i>classes</i> is part of your classpath, the generated classes will
+  be visible to your application now.
+  <p>
+</p>
+
+  <h3>5. Write application code</h3>
+
+  For example:
+
+  <pre>
+    package carwash;
+
+    import drjava.smyle.*;
+
+    class Main {
+      public static void main(String[] args) {
+        CarwashStore store = CarwashStore.open("store");
+
+        Snapshot snapshot = store.mutableSnapshot();
+        Table cars = store.cars(snapshot);
+
+        // add a dirty Toyota
+        cars.add(new Car().owner("John Doe").model("Toyota"));
+
+        System.out.println("There are "+cars.count(new Car_filter().washedEquals(false))
+          +" dirty cars in the carwash");
+
+        // clean the Toyota
+        cars.set(0, ((Car) cars.get(0)).washed(true));
+
+        System.out.println("There are "+cars.count(new Car_filter().washedEquals(false))
+          +" dirty cars in the carwash");
+
+        snapshot.commit();
+
+        store.close();
+      }
+    }
+  </pre>
+
+  Compile and run this as usual:
+  <p>
+</p>
+  
+  <pre>
+    set CLASSPATH=%CLASSPATH%;classes
+    javac -d classes carwash/Main.java
+    java carwash.Main
+  </pre>
+
+  <h3>Questions? Problems? Ideas?</h3>
+
+  <a href="mailto:doc@drjava.de">Just write!</a>
+  <p>
+</p>
+
+</td>
+</tr>
+<tr>
+<td colspan="3">
+<hr>
+<table width="100%">
+<tr>
+<td>
+          Author: Stefan Reich (<a href="mailto:doc@drjava.de">doc@drjava.de</a>)<br>
+          Smyle Homepage: <a href="http://www.drjava.de/smyle/">www.drjava.de/smyle</a>
+<br>
+</td><td align="right"><A href="http://sourceforge.net"><IMG src="http://sourceforge.net/sflogo.php?group_id=34021" width="88" height="31" border="0" alt="SourceForge Logo"></A></td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+</body>
+</html>

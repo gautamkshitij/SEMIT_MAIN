@@ -1,0 +1,55 @@
+<document title="Users">
+  <h>Who is using Smyle?</h>
+  
+  Smyle is successfully
+  being used in production applications. Here are a few examples:
+  
+  <h>A Community System (Chat/Forum/Mail/Guestbook)</h>
+  
+  This is a web-based community system developed by the author of Smyle.
+  Currently it is also the main application that drives the development
+  of Smyle itself.
+  <p/>
+  
+  The sources are not available yet, but I plan to include some of them in the
+  Smyle distribution as a sample application.
+  <p/>
+  
+  As the community server is upgraded to the latest development version
+  of Smyle very often, you might expect that it's quite unstable.
+  Surprisingly, this is not the case. The record so far:
+  <p/>
+  
+  <ul>
+    <li><em>Loss of data</em> - not once.</li>
+    <li><em>Availability</em> - very high. The only db-related incident was a
+      corrupted index structure caused by a pre-0.3 bug that prevented some of the users 
+      from logging in.</li>
+    <li><em>Performance</em> -  good. Typical page latency &lt;1s</li>
+  </ul>
+  
+  Some more facts:
+  
+  <ul>
+    <li>URL: <a href="http://www.fluesterstern.de">www.fluesterstern.de</a> (site is in German)</li>
+    <li>Technologies employed: Smyle, WebMacro, Tomcat</li>
+    <li>Language used: GJ</li>
+    <li>Tables: ~15</li>
+    <li>Rows per table: ~100-20,000</li>
+    <li>Write transactions so far: &gt;300,000</li>
+  </ul>
+  
+  <h>JImageDB</h>
+  A system of applications that can package a categorized,
+  keyword-searchable set of image files onto a CD.
+  
+  <ul>
+    <li>Author: James Damour</li>
+    <li>URL: <a href="http://jimagedb.sourceforge.net">http://jimagedb.sourceforge.net</a></li>
+    <li>Smyle's role: provide the persistent data store for the categories and
+keywords, and their relation to the image files</li>
+    <li>Rows per table: up to a few thousand</li>
+    <li>Technologies employed: Smyle, Servlets, Swing</li>
+  </ul>
+
+</document>

@@ -1,0 +1,169 @@
+<html>
+<head>
+<title>SMYLE: Concepts</title>
+</head>
+<body bgcolor="#ffffff" text="#000000">
+<table>
+<tr>
+<td valign="top">
+<table>
+<tr>
+<td><a href="index.html"><img border="0" src="smyle_small.jpg"></a></td>
+</tr>
+<tr>
+<td><a href="index.html">Home</a></td>
+</tr>
+<tr>
+<td><a href="http://sourceforge.net/project/showfiles.php?group_id=34021">Download!</a></td>
+</tr>
+<tr>
+<td><a href="features.html">Features</a></td>
+</tr>
+<tr>
+<td><a href="benchmark.html">Benchmark</a></td>
+</tr>
+<tr>
+<td><a href="users.html">Users</a></td>
+</tr>
+<tr>
+<td><a href="gettingstarted.html">Getting started</a></td>
+</tr>
+<tr>
+<td><a href="concepts.html">Concepts</a></td>
+</tr>
+<tr>
+<td><a href="data_types.html">Data types</a></td>
+</tr>
+<tr>
+<td><a href="javaapi/index.html">API (Java)</a></td>
+</tr>
+<tr>
+<td><a href="gjapi/index.html">API (GJ)</a></td>
+</tr>
+<tr>
+<td><a href="idioms.html">Idioms</a></td>
+</tr>
+<tr>
+<td><a href="architecture.html">Architecture</a></td>
+</tr>
+<tr>
+<td><a href="performance.html">Performance Tips</a></td>
+</tr>
+<tr>
+<td><a href="idl.html">IDL Grammar</a></td>
+</tr>
+<tr>
+<td><a href="browser.html">Browser</a></td>
+</tr>
+<tr>
+<td><a href="schema_evolution.html">Schema evolution</a></td>
+</tr>
+<tr>
+<td><a href="gj.html">GJ (Generic Java)</a></td>
+</tr>
+<tr>
+<td><a href="limitations.html">Limitations</a></td>
+</tr>
+<tr>
+<td><a href="history.html">History</a></td>
+</tr>
+<tr>
+<td><a href="http://sourceforge.net/forum/forum.php?forum_id=106587">Help Forum</a></td>
+</tr>
+</table>
+</td><td width="20"></td><td valign="top">
+<h2>SMYLE: Concepts</h2>
+  <h3>Snapshots</h3>
+  
+  With Smyle, whenever you work on the data in a store, you actually work on a <i>snapshot</i>.
+  Concept-wise, a Smyle snapshot is just the same as a holiday snapshot: a frozen image of how
+  the world looked like in a certain moment (the moment when you took the snapshot).
+  <p>
+</p>
+  
+  Snapshots have a number of pleasant qualities:
+  <ul>
+  <li>You can keep them as long as you want.
+  <p>
+</p>
+</li>
+  <li>The contents of a snapshot is always consistent. Modifications made to the store by other
+      writers will either be completely visible in the snapshot, or not at all.
+  <p>
+</p>
+</li>
+  <li>Taking a snapshot is an almost free operation in terms of time and memory consumption.<br>
+  <p>
+</p>
+</li>
+  </ul>
+
+  Smyle distinguishes between immutable and mutable snapshots. The former can only be used to 
+  request data from the database, while the latter also allow adding, updating or deleting.
+  <p>
+</p>
+  Immutable snapshots are fool-proof: You can create any number of them; you don't need to
+  explicitly release them (they are garbage collected automatically); and they always throw an
+  exception if you try to execute any modifying operations.
+  <p>
+</p>
+  Mutable snapshots, on the other hand, require a bit more care. At any given time, at most one
+  mutable snapshot per store may exist. This means to the programmer:
+
+  <ul>
+  <li>You have to make sure that you release the snapshot properly; either by committing it or by
+    forgetting it (undo all changes and release snapshot). This can be accomplished by
+    using a <i>finally</i> phrase (see <a href="idioms.html">Smyle idioms</a>).
+  <p>
+</p>
+</li>
+  <li>After you created the snapshot, you should try to get your work done as quickly as possible.
+    Try to gather all the data you need in advance. Never do any potentially blocking operations
+    (remote queries, user interaction, ...) while you hold a mutable snapshot.
+  <p>
+</p>
+</li>
+  </ul>
+  
+  <h3>Lock-Free Read Access</h3>
+  
+  This means: You never have to wait for any locks if you make and work on an immutable snapshot.
+  <p>
+</p>
+  
+  This can be essential for realtime or near-realtime applications. You could imagine an MP3
+  jukebox based on Smyle. Many clients stream MP3s right out of a huge Smyle
+  store. You can then do long-running transactions on the store (add new files, re-encode
+  existing files at a different bit rate, ...) without interrupting any of the streams -
+  even if some of them are playing the files you are working on. (Provided
+  your server can generally handle the load, of course.)
+  <p>
+</p>
+
+  The current implementation is semi-lock-free. For performance reasons, snapshots share common
+  data structures, which requires some synchronisation and forces parallel request into a serial
+  execution order. The general idea is preserved, though: locks are only held for the duration of
+  a single command; there is no way to lock out (reading) clients indefinitely by executing many
+  commands in a single transaction.
+  <p>
+</p>
+
+</td>
+</tr>
+<tr>
+<td colspan="3">
+<hr>
+<table width="100%">
+<tr>
+<td>
+          Author: Stefan Reich (<a href="mailto:doc@drjava.de">doc@drjava.de</a>)<br>
+          Smyle Homepage: <a href="http://www.drjava.de/smyle/">www.drjava.de/smyle</a>
+<br>
+</td><td align="right"><A href="http://sourceforge.net"><IMG src="http://sourceforge.net/sflogo.php?group_id=34021" width="88" height="31" border="0" alt="SourceForge Logo"></A></td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+</body>
+</html>

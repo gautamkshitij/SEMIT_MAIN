@@ -3,3 +3,7 @@
 1439920125302	Delete element
 1439924750988	Rename type 'File'
 1439927006547	Rename type 'File'
+1439933282911	Rename field 'Id'
+1439940725664	Delete element
+1439941387650	Rename type 'ObjectToJSON'
+1439943692573	Rename type 'getSourceFiles'

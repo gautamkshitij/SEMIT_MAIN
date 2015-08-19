@@ -1,0 +1,171 @@
+<document title="Idioms">
+  This document shows typical code fragments that give you an idea
+  about how to use Smyle.
+  <p/>
+  
+  <h>Startup and shutdown</h>
+  
+  You will usually want to open a Smyle store when your application starts up
+  and close the Store when it shuts down. (Theoretically, you could also open it
+  before every transaction and close it again afterwards, but that would be very
+  inefficient.)
+
+  This is how you open the store:
+  <codeblock>
+    Store store = Smyle.openStore("storeDirectory");
+  </codeblock>
+  
+  Or, if you defined a store named "MyStore" in your IDL file:
+  
+  <codeblock>
+    MyStore store = MyStore.open("storeDirectory");
+  </codeblock>
+
+  And this is how you close the store:
+  <codeblock>
+    store.close();
+  </codeblock>
+
+  (<code>storeDirectory</code> is the name of the directory the store resides in.)
+  Very easy, as you can see. A few more hints:
+
+  <ul>
+  <li>If Smyle doesn't find a store in the directory you specified,
+  it automatically creates one. It even creates the directory if necessary.</li>
+  <li>The directory is allowed to contain other files not related to Smyle. Smyle will not touch
+  any of them.</li>
+  <li>If the application terminates without closing the store, it won't do any harm to
+  the database. The only problem that can arise is that a lock file (storeDirectory/in-use.flag)
+  remains (whether this happens depends on VM, OS and how the application was terminated). 
+  In this case, you will have to delete that file before you can reopen the store.</li>
+  </ul>
+  
+  <p/>
+  
+  <h>Read transactions</h>
+
+  Read transactions are transactions that don't modify the database. They are performed on
+  an <i>immutable snapshot</i>. Here's an example:
+  <p/>
+
+  <codeblock>
+    Snapshot snapshot = store.snapshot();
+    Table persons = snapshot.getTable("persons", Person.getTypeInfo());
+    System.out.println("There are "+persons.size()+" persons in the database");
+    System.out.println("Their names in alphabetical order:");
+    for (Iterator i = persons.iterator(new Person_filter().orderByName()); i.hasNext(); )
+      System.out.println(((Person) i.next()).name);
+  </codeblock>
+
+  This example also demonstrates how you select a table and how you can iterate through its
+  elements.
+  <p/>
+
+  Immutable snapshots are very easy to handle because they don't require any cleanup. The
+  snapshot itself as well as all Table objects associated with it will be freed by the
+  garbage collector.
+  <p/>
+
+  <h>Write transactions</h>
+  
+  Write transactions are performed on <i>mutable snapshots</i> and are only slightly more
+  complicated than read transactions:
+  <p/>
+  
+  <codeblock>
+    Snapshot snapshot = store.mutableSnapshot();
+    try {
+      Table persons = snapshot.getTable("persons", Person.getTypeInfo());
+
+      // add Linda to database
+      persons.add(new Person("Linda", 33));
+
+      snapshot.commit(); // commit if everything went ok
+    } finally {
+      snapshot.forget(); // rollback in case of error
+    }
+  </codeblock>
+  
+  Both the commit() and forget() lines are absolutely essential. commit() causes
+  the changes you made to be written to disk and makes them visible to other clients.
+  forget() releases the write lock - without this, any subsequent attempts to begin
+  a write transaction will be blocked.
+  <p/>
+
+  <h>Unique keys</h>
+
+  Very often, the fields in a table can be separated in two groups: keys and values.
+  For example, in a table with this type:
+
+  <codeblock>
+    struct User {
+      string name;
+      long quota;
+      sequence&lt;string&gt; permissions;
+    }
+  </codeblock>
+
+  you would expect <i>name</i> to be the key field and <i>quota</i> and <i>permissions</i>
+  to be value fields.
+  <p/>
+
+  If your keys are unique (e.g., there are no two users with the same name), Smyle offers you
+  two functions, <i>get</i> and <i>put</i>, that make adding, retrieving and updating
+  records very easy:
+
+  <codeblock>
+    Table table = snapshot.getTable("users", User.getTypeInfo());
+
+    int getQuota(String username) {
+      User_filter filter = new User_filter().nameEquals(username);
+      User user = (User) table.get(filter);
+      if (user == null) throw new RuntimeException("No such user");
+      return user.quota;
+    }
+
+    void setQuota(String username, int quota) {
+      User_filter filter = new User_filter().nameEquals(username);
+      User user = (User) table.get(filter);
+      if (user == null) throw new RuntimeException("No such user");
+      table.put(filter, user.quota(quota));
+    }
+  </codeblock>
+
+  <h>Unique keys plus automatic record creation</h>
+
+  Some applications don't really need the notion of explicitely adding records. They rather
+  need an operation like "give me the record that matches criterion x, or create it if it
+  doesn't exist." Take for example:
+
+  <codeblock>
+    struct UserStats {
+      string name;
+      long logins;
+    }
+  </codeblock>
+
+  <i>logins</i> is supposed to count how often a certain user has logged in to date.
+  A user without a UserStats entry is semantically equivalent to a user with a UserStats
+  entry where <i>logins</i> == 0.
+  <p/>
+
+  In cases like this, where the default values you want are the same as Smyle's technical 
+  default values for fields (0 for integer fields, null for string fields), it makes sense
+  to use <i>getOrCreate</i> and <i>put</i>:
+
+  <codeblock>
+    Table table = snapshot.getTable("userstats", UserStats.getTypeInfo());
+
+    int getLogins(String username) {
+      UserStats_filter filter = new UserStats_filter().nameEquals(username);
+      return ((UserStats) table.getOrCreate(filter)).logins;
+    }
+
+    void recordLogin(String username) {
+      UserStats_filter filter = new UserStats_filter().nameEquals(username);
+      UserStats stats = (UserStats) table.getOrCreate(filter);
+      ++stats.logins;
+      table.put(filter, stats);
+    }
+  </codeblock>
+</document>

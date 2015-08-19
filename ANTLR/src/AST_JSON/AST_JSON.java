@@ -10,11 +10,9 @@ import org.antlr.runtime.tree.CommonTree;
 import com.habelitz.jsobjectizer.unmarshaller.antlrbridge.generated.JavaLexer;
 import com.habelitz.jsobjectizer.unmarshaller.antlrbridge.generated.JavaParser;
 
-public class AST_JSON
-{
+public class AST_JSON {
 
-	public static String getJSON(String filename)
-	{
+	public static String getJSON(String filePath) {
 
 		ANTLRFileStream input;
 		JavaLexer lexer;
@@ -23,9 +21,8 @@ public class AST_JSON
 		JavaParser.javaSource_return javascource_return;
 		CommonTree commonTree = null;
 
-		try
-		{
-			input = new ANTLRFileStream(filename);
+		try {
+			input = new ANTLRFileStream(filePath);
 			lexer = new JavaLexer(input);
 
 			tokens = new CommonTokenStream(lexer);
@@ -36,16 +33,12 @@ public class AST_JSON
 
 			commonTree = (CommonTree) javascource_return.getTree();
 
-		}
-		catch (IOException e)
-		{
-			System.err.println(filename + " Not Found");
+		} catch (IOException e) {
+			System.err.println(filePath + " Not Found");
 
-		}
-		catch (RecognitionException e)
-		{
+		} catch (RecognitionException e) {
 			// TODO Auto-generated catch block
-			System.err.println("Cannot Recognize File" + filename);
+			System.err.println("Cannot Recognize File" + filePath);
 		}
 
 		return toJson(parser, commonTree, " ");
@@ -55,28 +48,23 @@ public class AST_JSON
 	}
 
 	public static String toJson(JavaParser parser, CommonTree commonTree,
-			String indent)
-	{
+			String indent) {
 		String json = indent + "{\n" + indent + "\t\"tokenType\":"
 				+ commonTree.token.getType() + ",\n" + indent
 				+ "\t\"tokenName\":\""
 				+ commonTree.token.getText().replaceAll("\"", "\\\\\"") + "\"";
 
-		if (commonTree.getChildren() != null)
-		{
+		if (commonTree.getChildren() != null) {
 			String comma = "";
 			json += ",\n" + indent + "\t\"children\":[";
-			for (Object child : commonTree.getChildren())
-			{
+			for (Object child : commonTree.getChildren()) {
 				// assumes child is also CommonTree...
 				json += comma + "\n"
 						+ toJson(parser, (CommonTree) child, indent + "\t\t");
 				comma = ",";
 			}
 			json += "\n" + indent + "\t]\n";
-		}
-		else
-		{
+		} else {
 			json += "\n";
 		}
 

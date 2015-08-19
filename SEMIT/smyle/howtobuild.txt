@@ -1,0 +1,33 @@
+HOW TO BUILD SMYLE
+------------------
+Stefan Reich (doc@drjava.de)
+
+
+1. Make sure you have a JDK 1.2 or higher installed
+
+2. If you haven't done so, set the variable JAVA_HOME to the base directory of
+   your JDK. To do this, type something like
+   
+     export JAVA_HOME=/usr/java/jdk1.3   on Unix or
+     set JAVA_HOME=c:\jdk1.3             on Windows
+     
+3. cd to the Smyle base directory
+     
+3. All the libraries and compilers that Smyle needs to be built are included
+   in this distribution, so you don't need to install or configure anything
+   else (besides the JDK). Cool, huh?
+   
+   So now you just start the build:
+
+     bin/ant      on Unix or
+     bin\ant      on Windows
+     
+   ...and you're done!
+   
+   If the last line on the screen says "BUILD SUCCESSFUL", you now have the
+   following:
+   
+     -a binary package of Smyle in build/smyle.jar, ready for inclusion in
+      your projects
+     -(rudimentary) documentation in doc/api
+      

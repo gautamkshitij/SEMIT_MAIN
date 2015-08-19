@@ -1,0 +1,151 @@
+<?xml version="1.0"?>
+ 
+<document title="Getting started">
+  To write your first Smyle-based application, this is what you need to do:
+  
+  <ol>
+    <li>Download Smyle</li>
+    <li>Add smyle.jar to classpath</li>
+    <li>Write an IDL file</li>
+    <li>Run the Smyle code generator</li>
+    <li>Write application code</li>
+  </ol>
+
+  You can always go back from step 5 to step 3 (modify/extend the IDL file and
+  recompile it) if necessary. The classes that Smyle generates are completely distinct from
+  the ones you write (although your classes will contain references to the generated ones), 
+  so there is no risk of Smyle overwriting any hand-written code.
+  <p/>
+
+  <h>1. Download Smyle</h>
+
+  On the download page, you have the choice between two distributions: <i>bin</i> (binary)
+  and <i>src</i> (source). Choose <i>bin</i>.
+  <p/>
+
+  After downloading, unpack the zip file in a directory of your choice. 
+  This will create a subdirectory named smyle-0.8.3 containing the Smyle library and 
+  some documentation.
+  <p/>
+  
+  <h>2. Add smyle.jar to classpath</h>
+
+  How you do this depends on your preferences and the IDE or development tools you're using.
+  Using a standard JDK, you would execute a command like this:
+
+  <codeblock>
+    export CLASSPATH=$CLASSPATH:/home/myself/smyle-0.8.3/build/smyle.jar  (Unix)
+    set CLASSPATH=%CLASSPATH%;\java\smyle-0.8.3\build\smyle.jar           (Windows)
+  </codeblock>
+
+  smyle.jar is needed in three different places:
+  
+  <ol>
+  <li>for running the code generator</li>
+  <li>while compiling your application</li>
+  <li>while running your application</li>
+  </ol>
+
+  For #3, you can also use a special, condensed version of smyle.jar called smyle_compact.jar
+  (it's in the same directory as smyle.jar).
+  When deploying your application, you will probably prefer smyle_compact.jar since it is 
+  smaller and uses less memory when executed.
+  <p/>
+
+  <h>3. Write an IDL file</h>
+
+  The IDL file is where you define the names and formats of the tables you want to use;
+  similar to the information you put in an SQL <i>create table</i> statement.
+  <p/>
+
+  Here's a small example:
+
+  <codeblock>
+    struct Car {
+      autoincrement long id;
+      string owner;
+      string model;
+      boolean washed;
+    }
+
+    store CarwashStore {
+      table&lt;Car&gt; cars;
+    }
+  </codeblock>
+
+  Save this as <i>carwash.idl</i> and you're ready for step three.
+  <p/>
+
+  Note that we didn't specify any key fields or indexes. With Smyle, you never have to
+  think about which fields need to be indexed (and in which order) - 
+  Smyle does this for you by analyzing the queries your application executes!
+  <p/>
+
+  <h>4. Run the Smyle code generator</h>
+
+  The Smyle code generator transforms your IDL file into a set of Java class files.
+  (It also generates sources, but these aren't compilable by an ordinary Java compiler.
+  It can be very instructive to have a look at them though.)
+  <p/>
+  
+  In the example, you would run the code generator by typing:
+
+  <codeblock>
+    java drjava.smyle.CodeGenerator carwash.idl carwash gensources classes
+  </codeblock>
+
+  This will generate sources in gensources/carwash and class files in classes/carwash. If
+  <i>classes</i> is part of your classpath, the generated classes will
+  be visible to your application now.
+  <p/>
+
+  <h>5. Write application code</h>
+
+  For example:
+
+  <codeblock>
+    package carwash;
+
+    import drjava.smyle.*;
+
+    class Main {
+      public static void main(String[] args) {
+        CarwashStore store = CarwashStore.open("store");
+
+        Snapshot snapshot = store.mutableSnapshot();
+        Table cars = store.cars(snapshot);
+
+        // add a dirty Toyota
+        cars.add(new Car().owner("John Doe").model("Toyota"));
+
+        System.out.println("There are "+cars.count(new Car_filter().washedEquals(false))
+          +" dirty cars in the carwash");
+
+        // clean the Toyota
+        cars.set(0, ((Car) cars.get(0)).washed(true));
+
+        System.out.println("There are "+cars.count(new Car_filter().washedEquals(false))
+          +" dirty cars in the carwash");
+
+        snapshot.commit();
+
+        store.close();
+      }
+    }
+  </codeblock>
+
+  Compile and run this as usual:
+  <p/>
+  
+  <codeblock>
+    set CLASSPATH=%CLASSPATH%;classes
+    javac -d classes carwash/Main.java
+    java carwash.Main
+  </codeblock>
+
+  <h>Questions? Problems? Ideas?</h>
+
+  <a href="mailto:doc@drjava.de">Just write!</a>
+  <p/>
+
+</document>

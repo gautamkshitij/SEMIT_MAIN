@@ -1,0 +1,151 @@
+<html>
+<head>
+<title>SMYLE: Data types</title>
+</head>
+<body bgcolor="#ffffff" text="#000000">
+<table>
+<tr>
+<td valign="top">
+<table>
+<tr>
+<td><a href="index.html"><img border="0" src="smyle_small.jpg"></a></td>
+</tr>
+<tr>
+<td><a href="index.html">Home</a></td>
+</tr>
+<tr>
+<td><a href="http://sourceforge.net/project/showfiles.php?group_id=34021">Download!</a></td>
+</tr>
+<tr>
+<td><a href="features.html">Features</a></td>
+</tr>
+<tr>
+<td><a href="benchmark.html">Benchmark</a></td>
+</tr>
+<tr>
+<td><a href="users.html">Users</a></td>
+</tr>
+<tr>
+<td><a href="gettingstarted.html">Getting started</a></td>
+</tr>
+<tr>
+<td><a href="concepts.html">Concepts</a></td>
+</tr>
+<tr>
+<td><a href="data_types.html">Data types</a></td>
+</tr>
+<tr>
+<td><a href="javaapi/index.html">API (Java)</a></td>
+</tr>
+<tr>
+<td><a href="gjapi/index.html">API (GJ)</a></td>
+</tr>
+<tr>
+<td><a href="idioms.html">Idioms</a></td>
+</tr>
+<tr>
+<td><a href="architecture.html">Architecture</a></td>
+</tr>
+<tr>
+<td><a href="performance.html">Performance Tips</a></td>
+</tr>
+<tr>
+<td><a href="idl.html">IDL Grammar</a></td>
+</tr>
+<tr>
+<td><a href="browser.html">Browser</a></td>
+</tr>
+<tr>
+<td><a href="schema_evolution.html">Schema evolution</a></td>
+</tr>
+<tr>
+<td><a href="gj.html">GJ (Generic Java)</a></td>
+</tr>
+<tr>
+<td><a href="limitations.html">Limitations</a></td>
+</tr>
+<tr>
+<td><a href="history.html">History</a></td>
+</tr>
+<tr>
+<td><a href="http://sourceforge.net/forum/forum.php?forum_id=106587">Help Forum</a></td>
+</tr>
+</table>
+</td><td width="20"></td><td valign="top">
+<h2>SMYLE: Data types</h2>
+  In one respect, Smyle is much closer to traditional relational databases than
+  to object oriented databases: it basically stores just data, not objects.
+  However, unlike relational databases, Smyle supports sophisticated structured data types.
+  And it offers a source code generator that makes these data types appear almost
+  like "real" objects.
+  <p>
+</p>
+  
+  (When I say "objects", I'm talking about entities that encapsulate their data and
+  communicate with the
+  outside world through messages. Data records, on the other hand, are manipulated by
+  directly accessing their internal fields; there are no messages, and there is no
+  encapsulation.)
+  <p>
+</p>
+
+  A Smyle data <i>store</i> consists of a number of independent <i>tables</i>. Each
+  table is basically an ordered set of <i>rows</i>. All rows in one table are of the
+  same <i>struct type</i>.
+  <p>
+</p>
+  
+  Struct types are defined in a special language, the IDL (Interface Definition Language;
+  though it should rather be called Type Definition Language). A struct type consists of
+  named, typed fields. A field can be of a basic type (string, long (32 bit), long long (64 bit),
+  boolean);
+  of another struct type, or of a sequence type. The following IDL example illustrates all
+  three variants:
+  <p>
+</p>
+  
+  <pre>
+    struct Address {
+      string street;
+      string city;
+    };
+      
+    struct Person {
+      string name;
+      long age;
+      Address address;
+      sequence&lt;string&gt; titles;
+    };
+  </pre>
+  
+  After you wrote an IDL file, you use the Smyle code generator to transform it into Java
+  classes. You then have objects that you can manipulate very conveniently, e.g. like this:
+  
+  <pre>
+    Person john = new Person("John", 55, new Address("Main Road", "Birmingham"))
+      .titlesAdd("Ph. D.")
+      .titlesAdd("Professor");
+      
+    System.out.println("Name: "+john.name);
+    System.out.println("Full details: "+john);
+  </pre>
+
+</td>
+</tr>
+<tr>
+<td colspan="3">
+<hr>
+<table width="100%">
+<tr>
+<td>
+          Author: Stefan Reich (<a href="mailto:doc@drjava.de">doc@drjava.de</a>)<br>
+          Smyle Homepage: <a href="http://www.drjava.de/smyle/">www.drjava.de/smyle</a>
+<br>
+</td><td align="right"><A href="http://sourceforge.net"><IMG src="http://sourceforge.net/sflogo.php?group_id=34021" width="88" height="31" border="0" alt="SourceForge Logo"></A></td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+</body>
+</html>

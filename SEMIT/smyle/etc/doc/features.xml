@@ -1,0 +1,27 @@
+<document title="Features of current version (Smyle 0.8.3)">
+  <ul>
+    <li>Open source</li>
+    <li>Personal or commercial use at no charge</li>
+    <li>Convenient usage - seamlessly integrated with Java</li>
+    <li>Lightweight</li>
+    <li>Structured data types</li>
+    <li>Queries</li>
+    <li>Transactions (commit/rollback)</li>
+    <li>Self-optimizing: Indexes are created as necessary</li>
+    <li>Flexible multidimensional indexes</li>
+    <li>Basic schema evolution performed automatically</li>
+    <li>High reliability<ul>
+      <li>Journalling storage model</li>
+      <li>Robust, instant crash recovery</li>
+      <li>Backed by large unit test suite</li>
+      <li>Tried in real-world applications</li>
+    </ul></li>
+    <li>Full thread safety</li>
+    <li>Mostly lock-free read access</li>
+    <li>Pure Java (requires JDK 1.3 or higher)</li>
+    <li>Can be embedded in applications</li>
+    <li>Compatible with <a href="http://www.research.avayalabs.com/user/wadler/gj/">GJ</a> (extended Java dialect)</li>
+    <li>Based on Java Collection API where possible</li>
+    <li>Automatic conversion of legacy Smyle 0.1/0.2/0.2.5/0.3 beta/0.8.* stores</li>
+  </ul>
+</document>

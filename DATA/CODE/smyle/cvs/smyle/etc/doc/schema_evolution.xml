@@ -1,0 +1,66 @@
+<document title="Schema evolution">
+  <i>Schema evolution</i> takes place when you change the underlying IDL description (<i>schema</i>)
+  of a table that already contains data.
+  
+  <h>Adding fields</h>
+  Suppose you change your IDL definition from
+  <codeblock>
+    struct Person {
+      string name;
+      long age;
+    };
+  </codeblock>
+  to
+  <codeblock>
+    struct Person {
+      string name;
+      long age;
+      int gender;
+    };
+  </codeblock>
+  
+  This kind of schema evolution is fully supported by Smyle. After you compiled the new
+  schema, the first time you reopen the table, it is converted to the new schema automatically.
+  <p/>
+  Note: If after this point you try to access the table with the old schema again, you will
+  only have read access to the table. Essentially, you're trying to remove the new
+  field again (see next section).
+  
+  <h>Removing fields</h>
+  Suppose you change your IDL definition from
+  <codeblock>
+    struct Person {
+      string name;
+      long age;
+    };
+  </codeblock>
+  to
+  <codeblock>
+    struct Person {
+      string name;
+    };
+  </codeblock>
+  
+  If you do this, you can still open the table. But you now have what I call an <i>impaired view</i>
+  - you're not able to see all the fields in the table.
+  <p/>
+  If you try to create or alter rows while having an impaired view, semantic problems arise -
+  what happens with the additional fields? For this reason, Smyle only grants read access to
+  impaired view clients. Any calls to modifying methods such as add(T) raise an
+  ImmutableTableException.
+  
+  <h>Reordering fields</h>
+  This is fully supported.
+  <p/>
+  You should note, however, that in the current version this also requires a full conversion of
+  the table. So what you should try to avoid is having clients with different schemae
+  access the table in turn.
+  
+  <h>Renaming the struct</h>
+  This is fully supported. (It currently requires a conversion too.)
+  
+  <h>More sophisticated schema evolution</h>
+  ...is currently not supported. You will need to convert your table manually. (Just create another
+  table and copy all the entries in a loop).
+  
+</document>

@@ -1,0 +1,55 @@
+<document title="Data types">
+  In one respect, Smyle is much closer to traditional relational databases than
+  to object oriented databases: it basically stores just data, not objects.
+  However, unlike relational databases, Smyle supports sophisticated structured data types.
+  And it offers a source code generator that makes these data types appear almost
+  like "real" objects.
+  <p/>
+  
+  (When I say "objects", I'm talking about entities that encapsulate their data and
+  communicate with the
+  outside world through messages. Data records, on the other hand, are manipulated by
+  directly accessing their internal fields; there are no messages, and there is no
+  encapsulation.)
+  <p/>
+
+  A Smyle data <i>store</i> consists of a number of independent <i>tables</i>. Each
+  table is basically an ordered set of <i>rows</i>. All rows in one table are of the
+  same <i>struct type</i>.
+  <p/>
+  
+  Struct types are defined in a special language, the IDL (Interface Definition Language;
+  though it should rather be called Type Definition Language). A struct type consists of
+  named, typed fields. A field can be of a basic type (string, long (32 bit), long long (64 bit),
+  boolean);
+  of another struct type, or of a sequence type. The following IDL example illustrates all
+  three variants:
+  <p/>
+  
+  <codeblock>
+    struct Address {
+      string street;
+      string city;
+    };
+      
+    struct Person {
+      string name;
+      long age;
+      Address address;
+      sequence&lt;string&gt; titles;
+    };
+  </codeblock>
+  
+  After you wrote an IDL file, you use the Smyle code generator to transform it into Java
+  classes. You then have objects that you can manipulate very conveniently, e.g. like this:
+  
+  <codeblock>
+    Person john = new Person("John", 55, new Address("Main Road", "Birmingham"))
+      .titlesAdd("Ph. D.")
+      .titlesAdd("Professor");
+      
+    System.out.println("Name: "+john.name);
+    System.out.println("Full details: "+john);
+  </codeblock>
+
+</document>

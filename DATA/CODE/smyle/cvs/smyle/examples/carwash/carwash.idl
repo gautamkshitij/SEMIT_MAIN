@@ -1,0 +1,10 @@
+struct Car {
+      autoincrement long id;
+      string owner;
+      string model;
+      boolean washed;
+}
+
+store CarwashStore {
+      table<Car> cars;
+}

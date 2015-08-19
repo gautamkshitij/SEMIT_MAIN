@@ -1,0 +1,61 @@
+<document title="Concepts">
+  <h>Snapshots</h>
+  
+  With Smyle, whenever you work on the data in a store, you actually work on a <i>snapshot</i>.
+  Concept-wise, a Smyle snapshot is just the same as a holiday snapshot: a frozen image of how
+  the world looked like in a certain moment (the moment when you took the snapshot).
+  <p/>
+  
+  Snapshots have a number of pleasant qualities:
+  <ul>
+  <li>You can keep them as long as you want.
+  <p/></li>
+  <li>The contents of a snapshot is always consistent. Modifications made to the store by other
+      writers will either be completely visible in the snapshot, or not at all.
+  <p/></li>
+  <li>Taking a snapshot is an almost free operation in terms of time and memory consumption.<br/>
+  <p/></li>
+  </ul>
+
+  Smyle distinguishes between immutable and mutable snapshots. The former can only be used to 
+  request data from the database, while the latter also allow adding, updating or deleting.
+  <p/>
+  Immutable snapshots are fool-proof: You can create any number of them; you don't need to
+  explicitly release them (they are garbage collected automatically); and they always throw an
+  exception if you try to execute any modifying operations.
+  <p/>
+  Mutable snapshots, on the other hand, require a bit more care. At any given time, at most one
+  mutable snapshot per store may exist. This means to the programmer:
+
+  <ul>
+  <li>You have to make sure that you release the snapshot properly; either by committing it or by
+    forgetting it (undo all changes and release snapshot). This can be accomplished by
+    using a <i>finally</i> phrase (see <a href="idioms.html">Smyle idioms</a>).
+  <p/></li>
+  <li>After you created the snapshot, you should try to get your work done as quickly as possible.
+    Try to gather all the data you need in advance. Never do any potentially blocking operations
+    (remote queries, user interaction, ...) while you hold a mutable snapshot.
+  <p/></li>
+  </ul>
+  
+  <h>Lock-Free Read Access</h>
+  
+  This means: You never have to wait for any locks if you make and work on an immutable snapshot.
+  <p/>
+  
+  This can be essential for realtime or near-realtime applications. You could imagine an MP3
+  jukebox based on Smyle. Many clients stream MP3s right out of a huge Smyle
+  store. You can then do long-running transactions on the store (add new files, re-encode
+  existing files at a different bit rate, ...) without interrupting any of the streams -
+  even if some of them are playing the files you are working on. (Provided
+  your server can generally handle the load, of course.)
+  <p/>
+
+  The current implementation is semi-lock-free. For performance reasons, snapshots share common
+  data structures, which requires some synchronisation and forces parallel request into a serial
+  execution order. The general idea is preserved, though: locks are only held for the duration of
+  a single command; there is no way to lock out (reading) clients indefinitely by executing many
+  commands in a single transaction.
+  <p/>
+
+</document>

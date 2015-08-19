@@ -1,0 +1,46 @@
+<document title="the Storage that Makes Your Life Easier">
+  <logo />
+
+  <em>NEWS:</em> Version 0.8.3 brings a new field type and much better indexing.
+  <p/>
+
+  Links:
+  <ul>
+  <li><a href="http://sourceforge.net/project/showfiles.php?group_id=34021">Download</a></li>
+  <li><a href="features.html">Smyle feature list</a></li>
+  <li>Introductory documents: 
+    <a href="gettingstarted.html">Getting started</a>,
+    <a href="concepts.html">Concepts</a>, 
+  	<a href="data_types.html">Data types</a>,
+  	<a href="idioms.html">Idioms</a></li>
+  <li>Benchmark results - <a href="benchmark.html">Smyle vs. MySQL!</a></li>
+  <li><a href="users.html">Who is using Smyle?</a></li>
+  <li>How does it work? A look at Smyle's <a href="architecture.html">architecture</a></li>
+  <li><a href="http://sourceforge.net/forum/forum.php?forum_id=106587">Help forum</a>:
+    If you are a Smyle user and encounter any problems,
+    please post your question here - I will try to answer as soon as I can.
+    </li>
+  </ul>
+  
+  <h>What is Smyle?</h>
+  
+  Smyle is a database solution for Java applications.
+  <p/>
+  
+  <h>Why should I care about Smyle?</h>
+  
+  You will care about Smyle if you are, as I am, frustrated by existing storage solutions.
+  SQL has an awkward syntax and is poorly defined. All object oriented databases I've seen are
+  either expensive or unusable (complicated or no schema evolution, poor query support).
+  <p/>
+  
+  Smyle provides an innovative, pragmatic approach to data storage - easy to understand,
+  convenient to use, but powerful enough for real world applications. And best of all, Smyle is open source and
+  under the LGPL (that means, it's legal and free to use even in commercial applications).
+  <p/>
+  
+  <logos />
+  <p/>
+  
+  Credits: Smyle logo created by <a href="http://www.hemmesmann.de/">Bastian Hemmesmann</a>
+</document>

@@ -1,0 +1,144 @@
+<html>
+<head>
+<title>SMYLE: Limitations of current version, planned improvements</title>
+</head>
+<body bgcolor="#ffffff" text="#000000">
+<table>
+<tr>
+<td valign="top">
+<table>
+<tr>
+<td><a href="index.html"><img border="0" src="smyle_small.jpg"></a></td>
+</tr>
+<tr>
+<td><a href="index.html">Home</a></td>
+</tr>
+<tr>
+<td><a href="http://sourceforge.net/project/showfiles.php?group_id=34021">Download!</a></td>
+</tr>
+<tr>
+<td><a href="features.html">Features</a></td>
+</tr>
+<tr>
+<td><a href="benchmark.html">Benchmark</a></td>
+</tr>
+<tr>
+<td><a href="users.html">Users</a></td>
+</tr>
+<tr>
+<td><a href="gettingstarted.html">Getting started</a></td>
+</tr>
+<tr>
+<td><a href="concepts.html">Concepts</a></td>
+</tr>
+<tr>
+<td><a href="data_types.html">Data types</a></td>
+</tr>
+<tr>
+<td><a href="javaapi/index.html">API (Java)</a></td>
+</tr>
+<tr>
+<td><a href="gjapi/index.html">API (GJ)</a></td>
+</tr>
+<tr>
+<td><a href="idioms.html">Idioms</a></td>
+</tr>
+<tr>
+<td><a href="architecture.html">Architecture</a></td>
+</tr>
+<tr>
+<td><a href="performance.html">Performance Tips</a></td>
+</tr>
+<tr>
+<td><a href="idl.html">IDL Grammar</a></td>
+</tr>
+<tr>
+<td><a href="browser.html">Browser</a></td>
+</tr>
+<tr>
+<td><a href="schema_evolution.html">Schema evolution</a></td>
+</tr>
+<tr>
+<td><a href="gj.html">GJ (Generic Java)</a></td>
+</tr>
+<tr>
+<td><a href="limitations.html">Limitations</a></td>
+</tr>
+<tr>
+<td><a href="history.html">History</a></td>
+</tr>
+<tr>
+<td><a href="http://sourceforge.net/forum/forum.php?forum_id=106587">Help Forum</a></td>
+</tr>
+</table>
+</td><td width="20"></td><td valign="top">
+<h2>SMYLE: Limitations of current version, planned improvements</h2>
+  <table border="1">
+    <tr>
+      <th>Limitation</th>
+      <th>Planned improvement</th>
+    </tr>
+    <tr>
+      <td>No explicit relations between tables, no joins</td>
+      <td>The applications I'm currently using Smyle for don't need relations;
+          will probably think about this after 1.0</td>
+    </tr>
+    <tr>
+      <td>No remote connections to store</td>
+      <td>Relatively easy to implement over RMI or MCOP, maybe 0.9</td>
+    </tr>
+    <tr>
+      <td>Store can only be accessed by one process at a time</td>
+      <td>Multi-process access in evaluation</td>
+    </tr>
+    <tr>
+      <td>Query optimizer needs improvement</td>
+      <td>Fix before 1.0</td>
+    </tr>
+    <tr>
+      <td>Nested fields (structures in structures) should be supported better</td>
+      <td>Not determined yet</td>
+    </tr>
+    <tr>
+      <td>A few methods in the collection API are not implemented yet</td>
+      <td>Will be fixed in 0.9</td>
+    </tr>
+    <tr>
+      <td>Parts of API may change in future versions</td>
+      <td>API will be frozen in 1.0</td>
+    </tr>
+  </table>
+  
+  <h3>Additional features planned for future versions</h3>
+  <ul>
+    <li>Optimized range and wildcard queries</li>
+    <li>Improve Smyle Browser (e.g. allow data manipulation)</li>
+    <li>Flexible, customizable schema evolution</li>
+    <li>Less strict write synchronisation (allow parallel writes in certain circumstances)</li>
+    <li>Improved performance for large numbers of small transactions (planned for 0.9)</li>
+    <li>Benchmark suite to evaluate performance</li>
+    <li>Make Smyle fit for huge tables (1,000,000+ rows)</li>
+  </ul>
+  
+  Note: Though the Smyle API and store format may change, what I am determined to guarantee
+  is that any future Smyle version will be able to read existing Smyle stores. You won't lose
+  your data if you upgrade Smyle! (Making a backup is a good idea anyway...)
+</td>
+</tr>
+<tr>
+<td colspan="3">
+<hr>
+<table width="100%">
+<tr>
+<td>
+          Author: Stefan Reich (<a href="mailto:doc@drjava.de">doc@drjava.de</a>)<br>
+          Smyle Homepage: <a href="http://www.drjava.de/smyle/">www.drjava.de/smyle</a>
+<br>
+</td><td align="right"><A href="http://sourceforge.net"><IMG src="http://sourceforge.net/sflogo.php?group_id=34021" width="88" height="31" border="0" alt="SourceForge Logo"></A></td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+</body>
+</html>

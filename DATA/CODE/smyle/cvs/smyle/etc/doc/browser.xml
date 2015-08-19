@@ -1,0 +1,25 @@
+<document title="Browser">
+  The Smyle Browser is a Swing-based application to view the structure and definition
+  of Smyle stores. It has been added in Smyle 0.8.1 and is currently fairly limited;
+  it fails to display the contents of tables with a too complex structure.
+  <p/>
+  
+  <h>Usage</h>
+  First make sure you have smyle.jar in your classpath, then execute:
+  
+  <codeblock>
+    java drjava.smyle.Browser
+  </codeblock>
+  
+  This will open the browser's main window. Choose File/Open, go to your Smyle store
+  directory and choose any of the .smy files. You should see something like this:
+  <p/>
+  
+  <img src="browser.gif" />
+  <p/>
+  
+  Just click on any of the tables to display its structure and contents.
+  <p/>
+  
+</document>
+

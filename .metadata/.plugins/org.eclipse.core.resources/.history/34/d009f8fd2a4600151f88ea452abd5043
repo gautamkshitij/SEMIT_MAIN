@@ -1,0 +1,20 @@
+package uic.semit.Project.ProjectData.sourceCodeJSON;
+
+import java.util.List;
+
+public class FetchSourceFiles {
+
+	String DataPath = "../DATA/CODE/";
+
+	public static SourceFiles getSourceFiles(String projectName) {
+
+		List<String> codeFilePaths = null;
+
+		return null;
+
+	}
+
+	public static void main(String[] args) {
+	}
+
+}

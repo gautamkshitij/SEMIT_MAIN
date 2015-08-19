@@ -1,0 +1,51 @@
+<document title="History">
+  <h>Changes from 0.8.2 to 0.8.3</h>
+  <ul>
+    <li>Much more scalable index architecture</li>
+    <li>Support for field type sequence&lt;byte&gt;</li>
+  </ul>
+  
+  <h>Changes from 0.8.1 to 0.8.2</h>
+  <ul>
+    <li>JDK 1.4 compatibility</li>
+  </ul>
+  
+  <h>Changes from 0.8 to 0.8.1</h>
+  <ul>
+    <li>Support for read-only media (e.g. CDROM)</li>
+    <li>Swing-based database browser</li>
+    <li>Support for recursive type definitions</li>
+    <li>Improved schema evolution</li>
+    <li>Performance improvements</li>
+  </ul>
+  
+  <h>Changes from 0.2.5 to 0.8</h>
+  <ul>
+    <li>Automagic multidimensional indexing</li>
+    <li>Self-contained code generator that directly outputs .class files</li>
+    <li>Optimized for plain Java (while still compatible with GJ)</li>
+    <li>Vastly improved performance on big tables</li>
+    <li>Can efficiently handle 100,000+ rows</li>
+    <li>More powerful filters</li>
+    <li>Store definition can now be done in IDL</li>
+    <li>Lots of small improvements</li>
+  </ul>
+
+  <h>Changes from 0.2 to 0.2.5</h>
+  <ul>
+    <li>New, compact store format</li>
+    <li>Schema evolution</li>
+    <li>Table implements Collection API</li>
+    <li>New notion of <i>mutable</i> snapshots for write access</li>
+    <li>Write access is fully synchronized (no more ConcurrentWriteExceptions!)</li>
+    <li>Thread safety</li>
+    <li>API changes and improvements</li>
+  </ul>
+  
+  <h>Changes from 0.1 to 0.2</h>
+  <ul>
+    <li>Stores are now garbage collected</li>
+    <li>Much richer API</li>
+    <li>Big improvements in safety and concurrency</li>
+  </ul>
+</document>
