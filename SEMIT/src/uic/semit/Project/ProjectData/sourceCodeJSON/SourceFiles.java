@@ -1,4 +1,3 @@
-
 package uic.semit.Project.ProjectData.sourceCodeJSON;
 
 import java.util.ArrayList;
@@ -12,47 +11,46 @@ import org.apache.commons.lang.builder.ToStringBuilder;
 @Generated("org.jsonschema2pojo")
 public class SourceFiles {
 
-    @Expose
-    private List<CodeFile> files = new ArrayList<CodeFile>();
+	@Expose
+	private List<CodeFile> files = new ArrayList<CodeFile>();
 
-    /**
-     * 
-     * @return
-     *     The files
-     */
-    public List<CodeFile> getFiles() {
-        return files;
-    }
+	/**
+	 * 
+	 * @return The files
+	 */
+	public List<CodeFile> getFiles() {
+		return files;
+	}
 
-    /**
-     * 
-     * @param files
-     *     The files
-     */
-    public void setFiles(List<CodeFile> files) {
-        this.files = files;
-    }
+	/**
+	 * 
+	 * @param files
+	 *            The files
+	 */
+	public void setFiles(List<CodeFile> files) {
+		this.files = files;
+	}
 
-    @Override
-    public String toString() {
-        return ToStringBuilder.reflectionToString(this);
-    }
+	@Override
+	public String toString() {
+		return ToStringBuilder.reflectionToString(this);
+	}
 
-    @Override
-    public int hashCode() {
-        return new HashCodeBuilder().append(files).toHashCode();
-    }
+	@Override
+	public int hashCode() {
+		return new HashCodeBuilder().append(files).toHashCode();
+	}
 
-    @Override
-    public boolean equals(Object other) {
-        if (other == this) {
-            return true;
-        }
-        if ((other instanceof SourceFiles) == false) {
-            return false;
-        }
-        SourceFiles rhs = ((SourceFiles) other);
-        return new EqualsBuilder().append(files, rhs.files).isEquals();
-    }
+	@Override
+	public boolean equals(Object other) {
+		if (other == this) {
+			return true;
+		}
+		if ((other instanceof SourceFiles) == false) {
+			return false;
+		}
+		SourceFiles rhs = ((SourceFiles) other);
+		return new EqualsBuilder().append(files, rhs.files).isEquals();
+	}
 
 }

@@ -1,4 +1,3 @@
-
 package uic.semit.Project.ProjectData.sourceCodeJSON;
 
 import javax.annotation.Generated;
@@ -11,148 +10,159 @@ import org.apache.commons.lang.builder.ToStringBuilder;
 @Generated("org.jsonschema2pojo")
 public class SourceCode {
 
-    @Expose
-    private String fileName;
-    @Expose
-    private String absFilePath;
-    @Expose
-    private String fileType;
-    @Expose
-    private String fileSize;
-    @Expose
-    private Integer linesOfCode;
-    @SerializedName("code_json")
-    @Expose
-    private String codeJson;
+	@Expose
+	private String fileName;
+	@Expose
+	private String absFilePath;
+	@Expose
+	private String fileType;
+	@Expose
+	private long fileSize;
+	@Expose
+	private Integer linesOfCode;
+	@SerializedName("code_json")
+	@Expose
+	private String codeJson;
 
-    /**
-     * 
-     * @return
-     *     The fileName
-     */
-    public String getFileName() {
-        return fileName;
-    }
+	public SourceCode(String fileName, String absFilePath, String fileType,
+			long l, Integer linesOfCode, String codeJson) {
+		super();
+		this.fileName = fileName;
+		this.absFilePath = absFilePath;
+		this.fileType = fileType;
+		this.fileSize = l;
+		this.linesOfCode = linesOfCode;
+		this.codeJson = codeJson;
+	}
 
-    /**
-     * 
-     * @param fileName
-     *     The fileName
-     */
-    public void setFileName(String fileName) {
-        this.fileName = fileName;
-    }
+	/**
+	 * 
+	 * @return The fileName
+	 */
+	public String getFileName() {
+		return fileName;
+	}
 
-    /**
-     * 
-     * @return
-     *     The absFilePath
-     */
-    public String getAbsFilePath() {
-        return absFilePath;
-    }
+	/**
+	 * 
+	 * @param fileName
+	 *            The fileName
+	 */
+	public void setFileName(String fileName) {
+		this.fileName = fileName;
+	}
 
-    /**
-     * 
-     * @param absFilePath
-     *     The absFilePath
-     */
-    public void setAbsFilePath(String absFilePath) {
-        this.absFilePath = absFilePath;
-    }
+	/**
+	 * 
+	 * @return The absFilePath
+	 */
+	public String getAbsFilePath() {
+		return absFilePath;
+	}
 
-    /**
-     * 
-     * @return
-     *     The fileExtension
-     */
-    public String getFileExtension() {
-        return fileType;
-    }
+	/**
+	 * 
+	 * @param absFilePath
+	 *            The absFilePath
+	 */
+	public void setAbsFilePath(String absFilePath) {
+		this.absFilePath = absFilePath;
+	}
 
-    /**
-     * 
-     * @param fileExtension
-     *     The fileExtension
-     */
-    public void setFileExtension(String fileExtension) {
-        this.fileType = fileExtension;
-    }
+	/**
+	 * 
+	 * @return The fileExtension
+	 */
+	public String getFileExtension() {
+		return fileType;
+	}
 
-    /**
-     * 
-     * @return
-     *     The fileSize
-     */
-    public String getFileSize() {
-        return fileSize;
-    }
+	/**
+	 * 
+	 * @param fileExtension
+	 *            The fileExtension
+	 */
+	public void setFileExtension(String fileExtension) {
+		this.fileType = fileExtension;
+	}
 
-    /**
-     * 
-     * @param fileSize
-     *     The fileSize
-     */
-    public void setFileSize(String fileSize) {
-        this.fileSize = fileSize;
-    }
+	/**
+	 * 
+	 * @return The fileSize
+	 */
+	public long getFileSize() {
+		return fileSize;
+	}
 
-    /**
-     * 
-     * @return
-     *     The linesOfCode
-     */
-    public Integer getLinesOfCode() {
-        return linesOfCode;
-    }
+	/**
+	 * 
+	 * @param fileSize
+	 *            The fileSize
+	 */
+	public void setFileSize(long fileSize) {
+		this.fileSize = fileSize;
+	}
 
-    /**
-     * 
-     * @param linesOfCode
-     *     The linesOfCode
-     */
-    public void setLinesOfCode(Integer linesOfCode) {
-        this.linesOfCode = linesOfCode;
-    }
+	/**
+	 * 
+	 * @return The linesOfCode
+	 */
+	public Integer getLinesOfCode() {
+		return linesOfCode;
+	}
 
-    /**
-     * 
-     * @return
-     *     The codeJson
-     */
-    public String getCodeJson() {
-        return codeJson;
-    }
+	/**
+	 * 
+	 * @param linesOfCode
+	 *            The linesOfCode
+	 */
+	public void setLinesOfCode(Integer linesOfCode) {
+		this.linesOfCode = linesOfCode;
+	}
 
-    /**
-     * 
-     * @param codeJson
-     *     The code_json
-     */
-    public void setCodeJson(String codeJson) {
-        this.codeJson = codeJson;
-    }
+	/**
+	 * 
+	 * @return The codeJson
+	 */
+	public String getCodeJson() {
+		return codeJson;
+	}
 
-    @Override
-    public String toString() {
-        return ToStringBuilder.reflectionToString(this);
-    }
+	/**
+	 * 
+	 * @param codeJson
+	 *            The code_json
+	 */
+	public void setCodeJson(String codeJson) {
+		this.codeJson = codeJson;
+	}
 
-    @Override
-    public int hashCode() {
-        return new HashCodeBuilder().append(fileName).append(absFilePath).append(fileType).append(fileSize).append(linesOfCode).append(codeJson).toHashCode();
-    }
+	@Override
+	public String toString() {
+		return ToStringBuilder.reflectionToString(this);
+	}
 
-    @Override
-    public boolean equals(Object other) {
-        if (other == this) {
-            return true;
-        }
-        if ((other instanceof SourceCode) == false) {
-            return false;
-        }
-        SourceCode rhs = ((SourceCode) other);
-        return new EqualsBuilder().append(fileName, rhs.fileName).append(absFilePath, rhs.absFilePath).append(fileType, rhs.fileType).append(fileSize, rhs.fileSize).append(linesOfCode, rhs.linesOfCode).append(codeJson, rhs.codeJson).isEquals();
-    }
+	@Override
+	public int hashCode() {
+		return new HashCodeBuilder().append(fileName).append(absFilePath)
+				.append(fileType).append(fileSize).append(linesOfCode)
+				.append(codeJson).toHashCode();
+	}
+
+	@Override
+	public boolean equals(Object other) {
+		if (other == this) {
+			return true;
+		}
+		if ((other instanceof SourceCode) == false) {
+			return false;
+		}
+		SourceCode rhs = ((SourceCode) other);
+		return new EqualsBuilder().append(fileName, rhs.fileName)
+				.append(absFilePath, rhs.absFilePath)
+				.append(fileType, rhs.fileType).append(fileSize, rhs.fileSize)
+				.append(linesOfCode, rhs.linesOfCode)
+				.append(codeJson, rhs.codeJson).isEquals();
+	}
 
 }

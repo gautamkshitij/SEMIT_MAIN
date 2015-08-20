@@ -5,10 +5,8 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
-import java.util.Collection;
-import java.util.HashSet;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 public class FileUtils {
 	public static String readTextFile(String fileName) throws IOException {
@@ -30,24 +28,18 @@ public class FileUtils {
 				StandardOpenOption.CREATE);
 	}
 
-	public static Collection<File> listFileTree(File dir, String extension) {
-
-		Set<File> fileTree = new HashSet<File>();
-		try {
-			for (File entry : dir.listFiles()) {
-				if (entry.isFile()) {
-					if (entry.getName().endsWith(extension))
-						System.err.println(entry.getPath());
-					System.out.println(entry.length());
-					fileTree.add(entry);
-				} else {
-					listFileTree(entry, extension);
+	public static List<File> dirTree(File dir) {
+		List<File> fileTree = new ArrayList<File>();
+		for (File file : dir.listFiles()) {
+			if (file.isFile()) {
+				if (file.getName().endsWith("java")) {
+					fileTree.add(file);
+					System.out.println(file);
 				}
+			} else {
+				dirTree(dir);
 
 			}
-		} catch (Exception e) {
-			System.err.println(e);
-
 		}
 		return fileTree;
 	}
@@ -65,7 +57,7 @@ public class FileUtils {
 
 		File dir = new File(
 				"/Users/kshitijgautam/Google Drive/Coding/workspace/SEMIT_MAIN/DATA/CODE/smyle");
-		System.out.println(listFileTree(dir, "java"));
+		dirTree(dir);
 
 	}
 }

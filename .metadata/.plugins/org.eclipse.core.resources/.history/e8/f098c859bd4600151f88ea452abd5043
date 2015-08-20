@@ -1,0 +1,41 @@
+package uic.semit.Project.ProjectData.sourceCodeJSON;
+
+import java.io.File;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+
+import uic.semit.kshitij.FileWalker;
+
+public class FetchSourceFiles {
+
+	public static SourceFiles getSourceFiles(String projectName) {
+
+		List<File> codeFiles = FileWalker.getFilesFromProjectWithExtension(
+				projectName, ".java");
+
+		SourceFiles projectFiles = new SourceFiles();
+		SourceCode SourceCodeFile = new SourceCode();
+
+		HashMap<String, List<SourceCode>> repoMapWithCodeFiles = new HashMap<String, List<SourceCode>>();
+		List<SourceCode> SourceCodeFiles = new ArrayList<>();
+
+		for (File codeFile : codeFiles) {
+
+			if (codeFile.getName().contains("/svn/")) {
+			} else if (codeFile.getName().contains("/git/")) {
+			} else if (codeFile.getName().contains("/hg/")) {
+			} else if (codeFile.getName().contains("/bzr/")) {
+			} else if (codeFile.getName().contains("")) {
+			}
+
+		}
+
+		return null;
+	}
+
+	public static void main(String[] args) {
+
+	}
+
+}

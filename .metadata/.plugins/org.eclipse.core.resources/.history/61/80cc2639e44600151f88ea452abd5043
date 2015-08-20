@@ -1,0 +1,114 @@
+package uic.semit.Project.ProjectData.sourceCodeJSON;
+
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.LineNumberReader;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+
+import AST_JSON.AST_JSON;
+
+import uic.semit.kshitij.FileWalker;
+
+public class FetchSourceFiles {
+
+	public static SourceFiles getSourceFiles(String projectName) {
+
+		String extension = ".java";
+		List<File> codeFiles = FileWalker.getFilesFromProjectWithExtension(
+				projectName, extension);
+
+		SourceFiles projectFiles = new SourceFiles();
+
+		HashMap<String, List<SourceCode>> repoMapWithCodeFiles = new HashMap<String, List<SourceCode>>();
+
+		List<SourceCode> SourceCodeFilesSVN = new ArrayList<>();
+		List<SourceCode> SourceCodeFilesGIT = new ArrayList<>();
+		List<SourceCode> SourceCodeFilesCVS = new ArrayList<>();
+		List<SourceCode> SourceCodeFilesBZR = new ArrayList<>();
+		List<SourceCode> SourceCodeFilesHG = new ArrayList<>();
+		List<SourceCode> SourceCodeFilesCODE = new ArrayList<>();
+
+		for (File codeFile : codeFiles) {
+
+			if (codeFile.getName().contains("/svn/")) {
+
+				SourceCodeFilesSVN.add(new SourceCode(codeFile.getName(),
+						codeFile.getPath(), extension, codeFile.length(),
+						getNumberOfLines(codeFile), AST_JSON.getJSON(codeFile
+								.getPath())));
+
+			} else if (codeFile.getName().contains("/git/")) {
+				SourceCodeFilesGIT.add(new SourceCode(codeFile.getName(),
+						codeFile.getPath(), extension, codeFile.length(),
+						getNumberOfLines(codeFile), AST_JSON.getJSON(codeFile
+								.getPath())));
+
+			} else if (codeFile.getName().contains("/hg/")) {
+				SourceCodeFilesCVS.add(new SourceCode(codeFile.getName(),
+						codeFile.getPath(), extension, codeFile.length(),
+						getNumberOfLines(codeFile), AST_JSON.getJSON(codeFile
+								.getPath())));
+
+			} else if (codeFile.getName().contains("/bzr/")) {
+				SourceCodeFilesBZR.add(new SourceCode(codeFile.getName(),
+						codeFile.getPath(), extension, codeFile.length(),
+						getNumberOfLines(codeFile), AST_JSON.getJSON(codeFile
+								.getPath())));
+
+			} else if (codeFile.getName().contains("cvs")) {
+				SourceCodeFilesHG.add(new SourceCode(codeFile.getName(),
+						codeFile.getPath(), extension, codeFile.length(),
+						getNumberOfLines(codeFile), AST_JSON.getJSON(codeFile
+								.getPath())));
+
+			} else {
+				SourceCodeFilesCODE.add(new SourceCode(codeFile.getName(),
+						codeFile.getPath(), extension, codeFile.length(),
+						getNumberOfLines(codeFile), AST_JSON.getJSON(codeFile
+								.getPath())));
+
+			}
+
+		}
+if(SourceCodeFilesSVN.size()!=0)
+{
+		repoMapWithCodeFiles.put("SVN", );}
+		repoMapWithCodeFiles.put("GIT", );
+		repoMapWithCodeFiles.put("", );
+		repoMapWithCodeFiles.put("", );
+		repoMapWithCodeFiles.put("", );
+		repoMapWithCodeFiles.put("", );
+		
+		return null;
+	}
+
+	public static int getNumberOfLines(File file) {
+		LineNumberReader lnr;
+		int totalLines = 0;
+		try {
+			lnr = new LineNumberReader(new FileReader(file));
+			lnr.skip(Long.MAX_VALUE);
+			totalLines = lnr.getLineNumber() + 1;
+			lnr.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			System.err
+					.println("File Not Found for counting Lines: FileName: FetchSourceFiles.java");
+		}
+
+		// Add 1 because line index starts at 0
+		// Finally, the LineNumberReader object should be closed to prevent
+		// resource leak
+
+		return totalLines;
+	}
+
+	public static void main(String[] args) {
+
+	}
+
+}

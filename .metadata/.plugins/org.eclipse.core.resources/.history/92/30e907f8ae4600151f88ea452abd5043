@@ -1,0 +1,48 @@
+package uic.semit.kshitij;
+
+import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
+
+public class FileWalker {
+	static List<File> listofFiles = null;
+
+	public void walk(String path) {
+
+		File root = new File(path);
+
+		for (File f : root.listFiles()) {
+
+			if (f.isDirectory()) {
+
+				walk(f.getAbsolutePath());
+
+			}
+
+			else {
+
+				if (f.getName().endsWith(".java")) {
+
+					listofFiles.add(f);
+					System.out.println("File:" + f.getAbsoluteFile());
+
+				}
+			}
+		}
+
+	}
+
+	public static List<File> getFilesWithExtension(String projectName,
+			String extension) {
+		listofFiles = new ArrayList<>();
+		FileWalker fw = new FileWalker();
+		String codePath = "/Users/kshitijgautam/Google Drive/Coding/workspace/SEMIT_MAIN/DATA/CODE/"
+				+ projectName;
+		return fw.walk(codePath);
+	}
+
+	public static void main(String[] args) {
+		FileWalker.getFilesWithExtension("cachier", ".java");
+	}
+
+}

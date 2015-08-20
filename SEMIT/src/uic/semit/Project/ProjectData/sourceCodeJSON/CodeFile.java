@@ -1,4 +1,3 @@
-
 package uic.semit.Project.ProjectData.sourceCodeJSON;
 
 import java.util.ArrayList;
@@ -12,67 +11,73 @@ import org.apache.commons.lang.builder.ToStringBuilder;
 @Generated("org.jsonschema2pojo")
 public class CodeFile {
 
-    @Expose
-    private String repository;
-    @Expose
-    private List<SourceCode> sourceCode = new ArrayList<SourceCode>();
+	@Expose
+	private String repository;
+	@Expose
+	private List<SourceCode> sourceCode = new ArrayList<SourceCode>();
 
-    /**
-     * 
-     * @return
-     *     The repository
-     */
-    public String getRepository() {
-        return repository;
-    }
+	public CodeFile(String repository, List<SourceCode> sourceCode) {
+		super();
+		this.repository = repository;
+		this.sourceCode = sourceCode;
+	}
 
-    /**
-     * 
-     * @param repository
-     *     The repository
-     */
-    public void setRepository(String repository) {
-        this.repository = repository;
-    }
+	/**
+	 * 
+	 * @return The repository
+	 */
+	public String getRepository() {
+		return repository;
+	}
 
-    /**
-     * 
-     * @return
-     *     The sourceCode
-     */
-    public List<SourceCode> getSourceCode() {
-        return sourceCode;
-    }
+	/**
+	 * 
+	 * @param repository
+	 *            The repository
+	 */
+	public void setRepository(String repository) {
+		this.repository = repository;
+	}
 
-    /**
-     * 
-     * @param sourceCode
-     *     The sourceCode
-     */
-    public void setSourceCode(List<SourceCode> sourceCode) {
-        this.sourceCode = sourceCode;
-    }
+	/**
+	 * 
+	 * @return The sourceCode
+	 */
+	public List<SourceCode> getSourceCode() {
+		return sourceCode;
+	}
 
-    @Override
-    public String toString() {
-        return ToStringBuilder.reflectionToString(this);
-    }
+	/**
+	 * 
+	 * @param sourceCode
+	 *            The sourceCode
+	 */
+	public void setSourceCode(List<SourceCode> sourceCode) {
+		this.sourceCode = sourceCode;
+	}
 
-    @Override
-    public int hashCode() {
-        return new HashCodeBuilder().append(repository).append(sourceCode).toHashCode();
-    }
+	@Override
+	public String toString() {
+		return ToStringBuilder.reflectionToString(this);
+	}
 
-    @Override
-    public boolean equals(Object other) {
-        if (other == this) {
-            return true;
-        }
-        if ((other instanceof CodeFile) == false) {
-            return false;
-        }
-        CodeFile rhs = ((CodeFile) other);
-        return new EqualsBuilder().append(repository, rhs.repository).append(sourceCode, rhs.sourceCode).isEquals();
-    }
+	@Override
+	public int hashCode() {
+		return new HashCodeBuilder().append(repository).append(sourceCode)
+				.toHashCode();
+	}
+
+	@Override
+	public boolean equals(Object other) {
+		if (other == this) {
+			return true;
+		}
+		if ((other instanceof CodeFile) == false) {
+			return false;
+		}
+		CodeFile rhs = ((CodeFile) other);
+		return new EqualsBuilder().append(repository, rhs.repository)
+				.append(sourceCode, rhs.sourceCode).isEquals();
+	}
 
 }

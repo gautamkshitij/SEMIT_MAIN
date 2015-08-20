@@ -19,28 +19,24 @@ import org.jsoup.nodes.Node;
 import org.jsoup.nodes.TextNode;
 import org.jsoup.select.Elements;
 
-public class Read_SourceCode_WebHooks
-{
+public class Read_SourceCode_WebHooks {
 	/*
 	 * menu_consume_git menu_consume_mercurial menu_consume_svn menu_consume_cvs
 	 * menu_consume_code menu_consume_hg
 	 */
 
 	static ArrayList<String> menuConstants = new ArrayList<String>(
-			Arrays.asList("git", "mercurial", "svn", "cvs", "code", "hg"));
+			Arrays.asList("git", "mercurial", "svn", "cvs", "code", "hg", "bzr"));
 
 	static Document projectHomePage;
 	static List<String> webHookURLsProject = new ArrayList<String>();
 
-	public static void main(String[] args)
-	{
+	public static void main(String[] args) {
 
 		try (BufferedReader br = new BufferedReader(new FileReader(
-				"./DATA/projectNames/Java_Project_Names.txt")))
-		{
+				"./DATA/projectNames/Java_Project_Names.txt"))) {
 			ProjectStructure projectStructure;
-			for (String project; (project = br.readLine()) != null;)
-			{
+			for (String project; (project = br.readLine()) != null;) {
 				projectStructure = new ProjectStructure();
 
 				projectStructure.setProjectName(project);
@@ -71,37 +67,31 @@ public class Read_SourceCode_WebHooks
 		 * } system.out.println("finished all thread");
 		 */
 
-		catch (Exception e)
-		{
+		catch (Exception e) {
 			System.out.println(e.toString());
 		}
 	}
 
 	public static ProjectStructure getProjectStructure(String project,
-			ProjectStructure projectStructure)
-	{
+			ProjectStructure projectStructure) {
 		List<String> internalFolders = new ArrayList<String>();
 		Map<String, List<String>> folderStructure = new HashMap<String, List<String>>();
 		Map<String, String> internFolder_with_URL = new HashMap<String, String>();
 
-		try
-		{
+		try {
 			projectHomePage = Jsoup.connect(
 					"http://sourceforge.net/projects/" + project).get();
 
 			Elements menuElements = projectHomePage
 					.select("li[id^=menu_consume");
 
-			for (String menuType : menuConstants)
-			{
+			for (String menuType : menuConstants) {
 				Elements codeMenuElements = menuElements
 						.select("li[id^=menu_consume_" + menuType);
 
-				if (codeMenuElements.size() != 0)
-				{
+				if (codeMenuElements.size() != 0) {
 					Elements ulElement = codeMenuElements.select("ul");
-					if (ulElement.size() > 0)
-					{
+					if (ulElement.size() > 0) {
 						Elements liElements = ulElement.select("li");
 						/*
 						 * get href from <a> -> extract clone link extract text
@@ -109,8 +99,7 @@ public class Read_SourceCode_WebHooks
 						 * projectName/menuConstant/cloneHere
 						 */
 
-						for (Element e : liElements)
-						{
+						for (Element e : liElements) {
 							Elements anchorTag = e.getElementsByTag("a");
 							String acnhorText = anchorTag.text();
 							String achorLink = anchorTag.attr("href");
@@ -118,8 +107,7 @@ public class Read_SourceCode_WebHooks
 							 * calling getReadonlyURL for all internal urls
 							 */
 							if (acnhorText.length() != 0
-									&& achorLink.length() != 0)
-							{
+									&& achorLink.length() != 0) {
 								internalFolders.add(acnhorText);
 
 								internFolder_with_URL.put(acnhorText,
@@ -128,23 +116,19 @@ public class Read_SourceCode_WebHooks
 								// it does have internal projects, so true
 							}
 						}
-						if (internalFolders.size() != 0)
-						{
+						if (internalFolders.size() != 0) {
 							// System.out.println(menuType+""+internalFolders);
 							folderStructure.put(menuType, internalFolders);
 
 						}
-					}
-					else
-					{
+					} else {
 
 						/*
 						 * get href -> extract clone link get span text node,
 						 * make it as folder inside
 						 * /projectName/menuType/clone_here
 						 */
-						for (Element e : codeMenuElements)
-						{
+						for (Element e : codeMenuElements) {
 							Elements anchorTag = e.getElementsByTag("a");
 							Elements spanTag = e.getElementsByTag("span");
 							String achorLink = anchorTag.attr("href");
@@ -153,8 +137,7 @@ public class Read_SourceCode_WebHooks
 							 * calling getReadonlyURL for all internal urls
 							 */
 							if (achorLink.length() != 0
-									&& spanText.length() != 0)
-							{
+									&& spanText.length() != 0) {
 
 								internFolder_with_URL.put(menuType,
 										getReadOnlyURL(achorLink, project));
@@ -170,54 +153,41 @@ public class Read_SourceCode_WebHooks
 
 			}
 
-		}
-		catch (Exception e)
-		{
+		} catch (Exception e) {
 		}
 		return projectStructure;
 
 	}
 
-	public static String getReadOnlyURL(String url, String project)
-	{
+	public static String getReadOnlyURL(String url, String project) {
 		String readOnlyUrl = "";
 
 		Document projectInternalPage;
-		try
-		{
+		try {
 			projectInternalPage = Jsoup.connect("http://sourceforge.net" + url)
 					.get();
 
 			Element access_urls = projectInternalPage
 					.getElementById("access_urls");
-			if (access_urls != null)
-			{
+			if (access_urls != null) {
 				Elements anchorTags = access_urls.getElementsByTag("a");
 
-				for (Element e : anchorTags)
-				{
-					if (e.text().equalsIgnoreCase("RO"))
-					{
+				for (Element e : anchorTags) {
+					if (e.text().equalsIgnoreCase("RO")) {
 
 						readOnlyUrl = e.attr("data-url");
 					}
 				}
 
-			}
-			else
-			{
+			} else {
 				/*
 				 * no access url
 				 */
 				Elements code = projectInternalPage.select("code");
-				for (Node child : code.get(0).childNodes())
-				{
-					if (child instanceof TextNode)
-					{
-						if (((TextNode) child).text().length() != 0)
-						{
-							if (child.toString().trim().length() != 0)
-							{
+				for (Node child : code.get(0).childNodes()) {
+					if (child instanceof TextNode) {
+						if (((TextNode) child).text().length() != 0) {
+							if (child.toString().trim().length() != 0) {
 								readOnlyUrl = child.toString() + project;
 							}
 						}
@@ -225,9 +195,7 @@ public class Read_SourceCode_WebHooks
 				}
 			}
 
-		}
-		catch (Exception e)
-		{
+		} catch (Exception e) {
 			System.err.println(e.toString());
 		}
 

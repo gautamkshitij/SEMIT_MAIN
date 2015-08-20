@@ -4,6 +4,6 @@
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/JDT"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/SEMIT"/>
-	<classpathentry kind="lib" path="/Users/kshitijgautam/Google Drive/Coding/workspace/SEMIT_MAIN/ASTtoJSON.jar"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/ANTLR"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
