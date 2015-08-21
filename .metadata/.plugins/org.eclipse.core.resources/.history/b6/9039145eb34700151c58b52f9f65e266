@@ -1,0 +1,154 @@
+package uic.semit.Project.ProjectData.configurationFilesJSON;
+
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.LineNumberReader;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+
+import uic.semit.Project.ProjectData.sourceCodeJSON.CodeFile;
+import uic.semit.Project.ProjectData.sourceCodeJSON.SourceCode;
+import uic.semit.kshitij.FileWalker;
+import AST_JSON.AST_JSON;
+
+public class FetchConfigFiles {
+	public static ConfigFiles getConfigFiles(String projectName) {
+
+		if (new File(FileWalker.codePath + projectName).isDirectory()) {
+			String extension = ".xml";
+
+			List<File> ConfigCodeFiles = FileWalker
+					.getFilesFromProjectWithExtension(projectName, extension);
+
+			List<ConfigurationFile> configFiles = new ArrayList<>();
+			ConfigFiles configFile = new ConfigFiles();
+
+			List<ConfigFile> ConfigFileFilesSVN = new ArrayList<>();
+			List<ConfigFile> ConfigFileFilesGIT = new ArrayList<>();
+			List<ConfigFile> ConfigFileFilesCVS = new ArrayList<>();
+			List<ConfigFile> ConfigFileFilesBZR = new ArrayList<>();
+			List<ConfigFile> ConfigFileFilesHG = new ArrayList<>();
+			List<ConfigFile> ConfigFileFilesCODE = new ArrayList<>();
+
+			for (File ConfigurationFile : ConfigCodeFiles) {
+				if (ConfigurationFile.exists()) {
+					if (ConfigurationFile.getPath().contains(
+							"/" + projectName + "/svn/")) {
+
+						ConfigFileFilesSVN.add(new ConfigFile(ConfigurationFile
+								.getName(), ConfigurationFile.getPath(),
+								extension, ConfigurationFile.length(),
+								getNumberOfLines(ConfigurationFile), AST_JSON
+										.getJSON(ConfigurationFile.getPath())));
+
+					} else if (ConfigurationFile.getPath().contains(
+							"/" + projectName + "/git/")) {
+						ConfigFileFilesGIT.add(new ConfigFile(ConfigurationFile
+								.getName(), ConfigurationFile.getPath(),
+								extension, ConfigurationFile.length(),
+								getNumberOfLines(ConfigurationFile), AST_JSON
+										.getJSON(ConfigurationFile.getPath())));
+
+					} else if (ConfigurationFile.getPath().contains(
+							"/" + projectName + "/hg/")) {
+						ConfigFileFilesHG.add(new ConfigFile(ConfigurationFile
+								.getName(), ConfigurationFile.getPath(),
+								extension, ConfigurationFile.length(),
+								getNumberOfLines(ConfigurationFile), AST_JSON
+										.getJSON(ConfigurationFile.getPath())));
+
+					} else if (ConfigurationFile.getPath().contains(
+							"/" + projectName + "/bzr/")) {
+						ConfigFileFilesBZR.add(new ConfigFile(ConfigurationFile
+								.getName(), ConfigurationFile.getPath(),
+								extension, ConfigurationFile.length(),
+								getNumberOfLines(ConfigurationFile), AST_JSON
+										.getJSON(ConfigurationFile.getPath())));
+
+					} else if (ConfigurationFile.getPath().contains(
+							"/" + projectName + "/cvs/")) {
+						ConfigFileFilesCVS.add(new ConfigFile(ConfigurationFile
+								.getName(), ConfigurationFile.getPath(),
+								extension, ConfigurationFile.length(),
+								getNumberOfLines(ConfigurationFile), AST_JSON
+										.getJSON(ConfigurationFile.getPath())));
+
+					} else {
+						ConfigFileFilesCODE.add(new ConfigFile(
+								ConfigurationFile.getName(), ConfigurationFile
+										.getPath(), extension,
+								ConfigurationFile.length(),
+								getNumberOfLines(ConfigurationFile), AST_JSON
+										.getJSON(ConfigurationFile.getPath())));
+
+					}
+
+				}
+			}
+			/*
+			 * End of For Loop.
+			 */
+
+			if (ConfigFileFilesSVN.size() != 0) {
+
+				configFiles
+						.add(new ConfigurationFile("SVN", ConfigFileFilesSVN));
+
+			}
+
+			if (ConfigFileFilesGIT.size() != 0) {
+				configFiles
+						.add(new ConfigurationFile("GIT", ConfigFileFilesGIT));
+			}
+
+			if (ConfigFileFilesHG.size() != 0) {
+				configFiles.add(new ConfigurationFile("HG", ConfigFileFilesHG));
+			}
+
+			if (ConfigFileFilesCVS.size() != 0) {
+				configFiles
+						.add(new ConfigurationFile("CVS", ConfigFileFilesCVS));
+			}
+
+			if (ConfigFileFilesBZR.size() != 0) {
+				configFiles
+						.add(new ConfigurationFile("BZR", ConfigFileFilesBZR));
+			}
+
+			if (ConfigFileFilesCODE.size() != 0) {
+				configFiles.add(new ConfigurationFile("CODE",
+						ConfigFileFilesCODE));
+			}
+			projectFiles.setFiles(configFiles);
+
+			return projectFiles;
+
+		} else {
+			return null;
+		}
+	}
+
+	public static int getNumberOfLines(File file) {
+		LineNumberReader lnr;
+		int totalLines = 0;
+		try {
+			lnr = new LineNumberReader(new FileReader(file));
+			lnr.skip(Long.MAX_VALUE);
+			totalLines = lnr.getLineNumber() + 1;
+			lnr.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			System.err
+					.println("File Not Found for counting Lines: FileName: FetchSourceFiles.java");
+		}
+
+		// Add 1 because line index starts at 0
+		// Finally, the LineNumberReader object should be closed to prevent
+		// resource leak
+
+		return totalLines;
+	}
+
+}

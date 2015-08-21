@@ -1,0 +1,158 @@
+package uic.semit.Project.ProjectData.configurationFilesJSON;
+
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.LineNumberReader;
+import java.util.ArrayList;
+import java.util.List;
+
+import uic.semit.kshitij.FileWalker;
+import AST_JSON.AST_JSON;
+
+public class FetchConfigFiles {
+
+	public static ConfigFiles getSourceFiles(String projectName) {
+
+		if (new File(FileWalker.codePath + projectName).isDirectory()) {
+			String extension = ".java";
+			List<File> SourceCodeFiles = FileWalker
+					.getFilesFromProjectWithExtension(projectName, extension);
+
+			List<ConfigurationFile> codeFiles = new ArrayList<>();
+			ConfigFiles projectFiles = new ConfigFiles();
+
+			List<ConfigFile> SourceCodeFilesSVN = new ArrayList<>();
+			List<ConfigFile> SourceCodeFilesGIT = new ArrayList<>();
+			List<ConfigFile> SourceCodeFilesCVS = new ArrayList<>();
+			List<ConfigFile> SourceCodeFilesBZR = new ArrayList<>();
+			List<ConfigFile> SourceCodeFilesHG = new ArrayList<>();
+			List<ConfigFile> SourceCodeFilesCODE = new ArrayList<>();
+
+			for (File codeFile : SourceCodeFiles) {
+				if (codeFile.exists()) {
+					if (codeFile.getPath()
+							.contains("/" + projectName + "/svn/")) {
+
+						SourceCodeFilesSVN.add(new ConfigFile(codeFile
+								.getName(), codeFile.getPath(), extension,
+								codeFile.length(), getNumberOfLines(codeFile),
+								AST_JSON.getJSON(codeFile.getPath())));
+
+					} else if (codeFile.getPath().contains(
+							"/" + projectName + "/git/")) {
+						SourceCodeFilesGIT.add(new ConfigFile(codeFile
+								.getName(), codeFile.getPath(), extension,
+								codeFile.length(), getNumberOfLines(codeFile),
+								AST_JSON.getJSON(codeFile.getPath())));
+
+					} else if (codeFile.getPath().contains(
+							"/" + projectName + "/hg/")) {
+						SourceCodeFilesHG.add(new ConfigFile(
+								codeFile.getName(), codeFile.getPath(),
+								extension, codeFile.length(),
+								getNumberOfLines(codeFile), AST_JSON
+										.getJSON(codeFile.getPath())));
+
+					} else if (codeFile.getPath().contains(
+							"/" + projectName + "/bzr/")) {
+						SourceCodeFilesBZR.add(new ConfigFile(codeFile
+								.getName(), codeFile.getPath(), extension,
+								codeFile.length(), getNumberOfLines(codeFile),
+								AST_JSON.getJSON(codeFile.getPath())));
+
+					} else if (codeFile.getPath().contains(
+							"/" + projectName + "/cvs/")) {
+						SourceCodeFilesCVS.add(new ConfigFile(codeFile
+								.getName(), codeFile.getPath(), extension,
+								codeFile.length(), getNumberOfLines(codeFile),
+								AST_JSON.getJSON(codeFile.getPath())));
+
+					} else {
+						SourceCodeFilesCODE.add(new ConfigFile(codeFile
+								.getName(), codeFile.getPath(), extension,
+								codeFile.length(), getNumberOfLines(codeFile),
+								AST_JSON.getJSON(codeFile.getPath())));
+
+					}
+
+				}
+			}
+			/*
+			 * End of For Loop.
+			 */
+
+			if (SourceCodeFilesSVN.size() != 0) {
+
+				codeFiles.add(new ConfigurationFile("SVN", SourceCodeFilesSVN));
+
+			}
+
+			if (SourceCodeFilesGIT.size() != 0) {
+				codeFiles.add(new ConfigurationFile("GIT", SourceCodeFilesGIT));
+			}
+
+			if (SourceCodeFilesHG.size() != 0) {
+				codeFiles.add(new ConfigurationFile("HG", SourceCodeFilesHG));
+			}
+
+			if (SourceCodeFilesCVS.size() != 0) {
+				codeFiles.add(new ConfigurationFile("CVS", SourceCodeFilesCVS));
+			}
+
+			if (SourceCodeFilesBZR.size() != 0) {
+				codeFiles.add(new ConfigurationFile("BZR", SourceCodeFilesBZR));
+			}
+
+			if (SourceCodeFilesCODE.size() != 0) {
+				codeFiles.add(new ConfigurationFile("CODE", SourceCodeFilesCODE));
+			}
+			projectFiles.setFiles(codeFiles);
+
+			return projectFiles;
+
+		} else {
+			return null;
+		}
+	}
+
+	public static int getNumberOfLines(File file) {
+		LineNumberReader lnr;
+		int totalLines = 0;
+		try {
+			lnr = new LineNumberReader(new FileReader(file));
+			lnr.skip(Long.MAX_VALUE);
+			totalLines = lnr.getLineNumber() + 1;
+			lnr.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			System.err
+					.println("File Not Found for counting Lines: FileName: FetchSourceFiles.java");
+		}
+
+		// Add 1 because line index starts at 0
+		// Finally, the LineNumberReader object should be closed to prevent
+		// resource leak
+
+		return totalLines;
+	}
+
+	public static void main(String[] args) {
+
+		ConfigFiles sf = FetchConfigFiles.getSourceFiles("smyle");
+		List<ConfigurationFile> cf = sf.getFiles();
+
+		System.out.println(cf.size());
+		List<ConfigFile> sc = cf.get(0).getSourceCode();
+		System.out.println(sc.size());
+		System.out.println(cf.get(0).getRepository());
+		for (ConfigFile a : sc) {
+			// System.out.println(a.getCodeJson());
+
+		}
+		ConfigFiles sf1 = FetchConfigFiles.getSourceFiles("asdasds");
+		System.out.println(sf1);
+
+	}
+
+}

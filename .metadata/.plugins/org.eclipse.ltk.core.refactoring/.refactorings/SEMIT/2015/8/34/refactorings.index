@@ -7,3 +7,11 @@
 1439940725664	Delete element
 1439941387650	Rename type 'ObjectToJSON'
 1439943692573	Rename type 'getSourceFiles'
+1440127223582	Delete elements
+1440127235004	Copy compilation units
+1440127271561	Rename type 'CodeFile'
+1440127303923	Rename type 'SourceCode'
+1440127338378	Rename type 'ConfigFiles'
+1440127472286	Rename type 'SourceFiles'
+1440127551740	Rename type 'FetchSourceFiles'
+1440127606921	Rename local variable 'ConfigCodeFilesBZR'

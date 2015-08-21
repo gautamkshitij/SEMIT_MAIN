@@ -1,0 +1,6 @@
+package come.habelitz.jsobjectizer.unmarshaller.antlrbridge.generated;
+
+public class PrintAST
+{
+
+}

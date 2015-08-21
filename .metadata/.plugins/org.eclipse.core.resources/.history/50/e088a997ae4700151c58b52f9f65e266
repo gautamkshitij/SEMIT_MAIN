@@ -1,0 +1,9 @@
+package uic.semit.Project.ProjectData.configurationFilesJSON;
+
+public class FetchConfigFiles {
+	public static ConfigFiles getConfigFiles(String projectName) {
+
+		return null;
+	}
+
+}

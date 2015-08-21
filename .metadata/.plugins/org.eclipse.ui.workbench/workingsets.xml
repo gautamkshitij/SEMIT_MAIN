@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <workingSetManager>
 <workingSet editPageId="org.eclipse.jdt.ui.JavaWorkingSetPage" factoryID="org.eclipse.ui.internal.WorkingSetFactory" id="1439880460089_2" label="SEMIT" name="SEMIT">
-<item elementID="=Antlr_Tutorial1" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/Antlr_Tutorial1" type="4"/>
 <item elementID="=ANTLR" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
 <item elementID="=SEMIT" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
 <item elementID="=SEMIT_Testing" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
@@ -12,5 +12,7 @@
 <workingSet aggregate="true" factoryID="org.eclipse.ui.internal.WorkingSetFactory" id="1439881320009_4" label="Window Working Set" name="Aggregate for window 1439881320009"/>
 <workingSet aggregate="true" factoryID="org.eclipse.ui.internal.WorkingSetFactory" id="1439881511361_5" label="Window Working Set" name="Aggregate for window 1439881511361"/>
 <workingSet aggregate="true" factoryID="org.eclipse.ui.internal.WorkingSetFactory" id="1439920107695_6" label="Window Working Set" name="Aggregate for window 1439920107695"/>
+<workingSet aggregate="true" factoryID="org.eclipse.ui.internal.WorkingSetFactory" id="1440116491726_7" label="Window Working Set" name="Aggregate for window 1440116491726"/>
+<workingSet aggregate="true" factoryID="org.eclipse.ui.internal.WorkingSetFactory" id="1440119497291_8" label="Window Working Set" name="Aggregate for window 1440119497291"/>
 <mruList name="SEMIT"/>
 </workingSetManager>

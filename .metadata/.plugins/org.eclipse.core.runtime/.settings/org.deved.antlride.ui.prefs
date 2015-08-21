@@ -1,0 +1,11 @@
+content_assist_autoactivation=false
+eclipse.preferences.version=1
+editor_bg_color=248,248,248
+editor_folding_enabled=false
+formatter.indentation.size=4
+formatter.tabulation.char=tab
+formatter.tabulation.size=4
+sourceHoverBackgroundColor=250,251,197
+sourceHoverBackgroundColor.SystemDefault=true
+useAnnotationsPrefPage=true
+useQuickDiffPrefPage=true

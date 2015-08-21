@@ -1,0 +1,10 @@
+package uic.semit.Project.ProjectData.configurationFilesJSON;
+
+import uic.semit.Project.ProjectData.sourceCodeJSON.SourceFiles;
+
+public class FetchConfigFiles {
+	public static SourceFiles getSourceFiles(String projectName) {
+		return null;
+	}
+
+}

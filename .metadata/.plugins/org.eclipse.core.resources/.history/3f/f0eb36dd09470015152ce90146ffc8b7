@@ -1,0 +1,11 @@
+package grammar;
+
+public class Gen {
+	public static void main(String[] args) {
+		String[] arg0 = {
+				"-visitor",
+				"/Users/kshitijgautam/Google Drive/Coding/workspace/SEMIT_MAIN/ANTLR4_Tutorial/src/grammar/Java.g4",
+				"-package", "mypackage" };
+		org.antlr.v4.Tool.main(arg0);
+	}
+}

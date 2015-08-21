@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section name="Workbench">
+	<section name="package">
+		<item value="1440" key="x"/>
+		<item value="525" key="width"/>
+		<item value="346" key="y"/>
+		<item value="388" key="height"/>
+	</section>
+	<section name="registerLanguageTarget">
+		<item value="1488" key="x"/>
+		<item value="383" key="width"/>
+		<item value="415" key="y"/>
+		<item value="250" key="height"/>
+	</section>
+	<section name="AntlrTokenVocabSelectionDialog">
+		<item value="true" key="ShowStatusLine"/>
+		<item value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;&#x0A;&lt;History&gt;&#x0A;&lt;historyRootNode/&gt;&#x0A;&lt;/History&gt;" key="History"/>
+		<section name="DialogBoundsSettings">
+			<item value="600" key="DIALOG_WIDTH"/>
+			<item value="1|.Helvetica Neue DeskInterface|11.0|0|COCOA|1|.HelveticaNeueDeskInterface-Regular" key="DIALOG_FONT_NAME"/>
+			<item value="500" key="DIALOG_HEIGHT"/>
+			<item value="-38" key="DIALOG_X_ORIGIN"/>
+			<item value="-83" key="DIALOG_Y_ORIGIN"/>
+		</section>
+	</section>
+</section>
