@@ -7,12 +7,14 @@ import org.antlr.runtime.CommonTokenStream;
 import org.antlr.runtime.RecognitionException;
 import org.antlr.runtime.tree.CommonTree;
 
+import com.google.gson.JsonElement;
+import com.google.gson.JsonParser;
 import com.habelitz.jsobjectizer.unmarshaller.antlrbridge.generated.JavaLexer;
 import com.habelitz.jsobjectizer.unmarshaller.antlrbridge.generated.JavaParser;
 
 public class AST_JSON {
 
-	public static String getJSON(String filePath) {
+	public static JsonElement getJSON(String filePath) {
 
 		ANTLRFileStream input;
 		JavaLexer lexer;
@@ -20,7 +22,9 @@ public class AST_JSON {
 		JavaParser parser = null;
 		JavaParser.javaSource_return javascource_return;
 		CommonTree commonTree = null;
-		String jsonCode = "";
+		JsonParser jsonParser = new JsonParser();
+		JsonElement element = null;
+		String jsonCode = null;
 		try {
 			input = new ANTLRFileStream(filePath);
 			lexer = new JavaLexer(input);
@@ -33,19 +37,23 @@ public class AST_JSON {
 
 			commonTree = (CommonTree) javascource_return.getTree();
 			jsonCode = toJson(parser, commonTree, " ");
+
+			element = jsonParser.parse(jsonCode);
+
 		} catch (IOException e) {
 			System.err.println(filePath + " Not Found");
 		} catch (RecognitionException e) {
 			// TODO Auto-generated catch block
 			System.err.println("Cannot Recognize File" + filePath);
 		} catch (Exception e) {
-			System.out.println(  "\n" + "error" + filePath);
+			System.out.println(e + "\n" + "error" + filePath);
+		}
+		if (element != null) {
+			return element;
+		} else {
+			return null;
 		}
 
-		return jsonCode;
-
-		// System.err.println(t.getText() + " --- " + t.getType() + "---- "
-		// + t.getToken());
 	}
 
 	public static String toJson(JavaParser parser, CommonTree commonTree,
@@ -76,7 +84,9 @@ public class AST_JSON {
 
 	public static void main(String[] args) {
 
-		AST_JSON.getJSON("/Users/kshitijgautam/Google Drive/Coding/workspace/SEMIT_MAIN/DATA/CODE/smyle/cvs/smyle/src/drjava/smyle/core/Handle.java");
+		System.out
+				.println(AST_JSON
+						.getJSON("/Users/kshitijgautam/Google Drive/Coding/Antlr_Tutorial1/src/tutorial/HelloWorld.java"));
 	}
 
 }

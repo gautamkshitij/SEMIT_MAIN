@@ -1,6 +1,8 @@
 package uic.semit.Project.ProjectData.sourceCodeJSON;
 
 import javax.annotation.Generated;
+
+import com.google.gson.JsonElement;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 import org.apache.commons.lang.builder.EqualsBuilder;
@@ -22,10 +24,10 @@ public class SourceCode {
 	private Integer linesOfCode;
 	@SerializedName("code_json")
 	@Expose
-	private String codeJson;
+	private JsonElement codeJson;
 
 	public SourceCode(String fileName, String absFilePath, String fileType,
-			long l, Integer linesOfCode, String codeJson) {
+			long l, Integer linesOfCode, JsonElement codeJson) {
 		super();
 		this.fileName = fileName;
 		this.absFilePath = absFilePath;
@@ -124,7 +126,7 @@ public class SourceCode {
 	 * 
 	 * @return The codeJson
 	 */
-	public String getCodeJson() {
+	public JsonElement getCodeJson() {
 		return codeJson;
 	}
 
@@ -133,7 +135,7 @@ public class SourceCode {
 	 * @param codeJson
 	 *            The code_json
 	 */
-	public void setCodeJson(String codeJson) {
+	public void setCodeJson(JsonElement codeJson) {
 		this.codeJson = codeJson;
 	}
 

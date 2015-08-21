@@ -1,158 +1,171 @@
-
 package uic.semit.Project.ProjectData.configurationFilesJSON;
 
 import javax.annotation.Generated;
-import com.google.gson.annotations.Expose;
-import com.google.gson.annotations.SerializedName;
+
 import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
 import org.apache.commons.lang.builder.ToStringBuilder;
 
+import com.google.gson.JsonElement;
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
+
 @Generated("org.jsonschema2pojo")
 public class ConfigFile {
 
-    @Expose
-    private String fileName;
-    @Expose
-    private String absFilePath;
-    @Expose
-    private String fileExtension;
-    @Expose
-    private String FileSize;
-    @Expose
-    private String linesOfCode;
-    @SerializedName("config_code")
-    @Expose
-    private String configCode;
+	@Expose
+	private String fileName;
+	@Expose
+	private String absFilePath;
+	@Expose
+	private String fileType;
+	@Expose
+	private long fileSize;
+	@Expose
+	private Integer linesOfCode;
+	@SerializedName("code_json")
+	@Expose
+	private JsonElement codeJson;
 
-    /**
-     * 
-     * @return
-     *     The fileName
-     */
-    public String getFileName() {
-        return fileName;
-    }
+	public ConfigFile(String fileName, String absFilePath, String fileType,
+			long l, Integer linesOfCode, JsonElement codeJson) {
+		super();
+		this.fileName = fileName;
+		this.absFilePath = absFilePath;
+		this.fileType = fileType;
+		this.fileSize = l;
+		this.linesOfCode = linesOfCode;
+		this.codeJson = codeJson;
+	}
 
-    /**
-     * 
-     * @param fileName
-     *     The fileName
-     */
-    public void setFileName(String fileName) {
-        this.fileName = fileName;
-    }
+	/**
+	 * 
+	 * @return The fileName
+	 */
+	public String getFileName() {
+		return fileName;
+	}
 
-    /**
-     * 
-     * @return
-     *     The absFilePath
-     */
-    public String getAbsFilePath() {
-        return absFilePath;
-    }
+	/**
+	 * 
+	 * @param fileName
+	 *            The fileName
+	 */
+	public void setFileName(String fileName) {
+		this.fileName = fileName;
+	}
 
-    /**
-     * 
-     * @param absFilePath
-     *     The absFilePath
-     */
-    public void setAbsFilePath(String absFilePath) {
-        this.absFilePath = absFilePath;
-    }
+	/**
+	 * 
+	 * @return The absFilePath
+	 */
+	public String getAbsFilePath() {
+		return absFilePath;
+	}
 
-    /**
-     * 
-     * @return
-     *     The fileExtension
-     */
-    public String getFileExtension() {
-        return fileExtension;
-    }
+	/**
+	 * 
+	 * @param absFilePath
+	 *            The absFilePath
+	 */
+	public void setAbsFilePath(String absFilePath) {
+		this.absFilePath = absFilePath;
+	}
 
-    /**
-     * 
-     * @param fileExtension
-     *     The fileExtension
-     */
-    public void setFileExtension(String fileExtension) {
-        this.fileExtension = fileExtension;
-    }
+	/**
+	 * 
+	 * @return The fileExtension
+	 */
+	public String getFileExtension() {
+		return fileType;
+	}
 
-    /**
-     * 
-     * @return
-     *     The FileSize
-     */
-    public String getFileSize() {
-        return FileSize;
-    }
+	/**
+	 * 
+	 * @param fileExtension
+	 *            The fileExtension
+	 */
+	public void setFileExtension(String fileExtension) {
+		this.fileType = fileExtension;
+	}
 
-    /**
-     * 
-     * @param FileSize
-     *     The FileSize
-     */
-    public void setFileSize(String FileSize) {
-        this.FileSize = FileSize;
-    }
+	/**
+	 * 
+	 * @return The fileSize
+	 */
+	public long getFileSize() {
+		return fileSize;
+	}
 
-    /**
-     * 
-     * @return
-     *     The linesOfCode
-     */
-    public String getLinesOfCode() {
-        return linesOfCode;
-    }
+	/**
+	 * 
+	 * @param fileSize
+	 *            The fileSize
+	 */
+	public void setFileSize(long fileSize) {
+		this.fileSize = fileSize;
+	}
 
-    /**
-     * 
-     * @param linesOfCode
-     *     The linesOfCode
-     */
-    public void setLinesOfCode(String linesOfCode) {
-        this.linesOfCode = linesOfCode;
-    }
+	/**
+	 * 
+	 * @return The linesOfCode
+	 */
+	public Integer getLinesOfCode() {
+		return linesOfCode;
+	}
 
-    /**
-     * 
-     * @return
-     *     The configCode
-     */
-    public String getConfigCode() {
-        return configCode;
-    }
+	/**
+	 * 
+	 * @param linesOfCode
+	 *            The linesOfCode
+	 */
+	public void setLinesOfCode(Integer linesOfCode) {
+		this.linesOfCode = linesOfCode;
+	}
 
-    /**
-     * 
-     * @param configCode
-     *     The config_code
-     */
-    public void setConfigCode(String configCode) {
-        this.configCode = configCode;
-    }
+	/**
+	 * 
+	 * @return The codeJson
+	 */
+	public JsonElement getCodeJson() {
+		return codeJson;
+	}
 
-    @Override
-    public String toString() {
-        return ToStringBuilder.reflectionToString(this);
-    }
+	/**
+	 * 
+	 * @param codeJson
+	 *            The code_json
+	 */
+	public void setCodeJson(JsonElement codeJson) {
+		this.codeJson = codeJson;
+	}
 
-    @Override
-    public int hashCode() {
-        return new HashCodeBuilder().append(fileName).append(absFilePath).append(fileExtension).append(FileSize).append(linesOfCode).append(configCode).toHashCode();
-    }
+	@Override
+	public String toString() {
+		return ToStringBuilder.reflectionToString(this);
+	}
 
-    @Override
-    public boolean equals(Object other) {
-        if (other == this) {
-            return true;
-        }
-        if ((other instanceof ConfigFile) == false) {
-            return false;
-        }
-        ConfigFile rhs = ((ConfigFile) other);
-        return new EqualsBuilder().append(fileName, rhs.fileName).append(absFilePath, rhs.absFilePath).append(fileExtension, rhs.fileExtension).append(FileSize, rhs.FileSize).append(linesOfCode, rhs.linesOfCode).append(configCode, rhs.configCode).isEquals();
-    }
+	@Override
+	public int hashCode() {
+		return new HashCodeBuilder().append(fileName).append(absFilePath)
+				.append(fileType).append(fileSize).append(linesOfCode)
+				.append(codeJson).toHashCode();
+	}
+
+	@Override
+	public boolean equals(Object other) {
+		if (other == this) {
+			return true;
+		}
+		if ((other instanceof ConfigFile) == false) {
+			return false;
+		}
+		ConfigFile rhs = ((ConfigFile) other);
+		return new EqualsBuilder().append(fileName, rhs.fileName)
+				.append(absFilePath, rhs.absFilePath)
+				.append(fileType, rhs.fileType).append(fileSize, rhs.fileSize)
+				.append(linesOfCode, rhs.linesOfCode)
+				.append(codeJson, rhs.codeJson).isEquals();
+	}
 
 }

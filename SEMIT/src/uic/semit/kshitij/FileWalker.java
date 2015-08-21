@@ -6,6 +6,7 @@ import java.util.List;
 
 public class FileWalker {
 	static List<File> listofFiles = null;
+	public static String codePath = "/Users/kshitijgautam/Google Drive/Coding/workspace/SEMIT_MAIN/DATA/CODE/";
 
 	public void walk(String path, String extension) {
 
@@ -24,7 +25,7 @@ public class FileWalker {
 				if (f.getName().endsWith(extension)) {
 
 					listofFiles.add(f);
-					System.out.println("File:" + f.getAbsoluteFile());
+					//					System.out.println("File:" + f.getAbsoluteFile());
 
 				}
 			}
@@ -36,9 +37,8 @@ public class FileWalker {
 			String projectName, String extension) {
 		listofFiles = new ArrayList<>();
 		FileWalker fw = new FileWalker();
-		String codePath = "/Users/kshitijgautam/Google Drive/Coding/workspace/SEMIT_MAIN/DATA/CODE/"
-				+ projectName;
-		fw.walk(codePath, extension);
+
+		fw.walk(codePath + projectName, extension);
 		return listofFiles;
 	}
 

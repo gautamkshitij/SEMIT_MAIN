@@ -9,6 +9,7 @@ import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
 import org.apache.commons.lang.builder.ToStringBuilder;
 
+import uic.semit.Project.ProjectData.configurationFilesJSON.ConfigFiles;
 import uic.semit.Project.ProjectData.sourceCodeJSON.SourceFiles;
 
 @Generated("org.jsonschema2pojo")
@@ -34,6 +35,7 @@ public class Project {
 	private String videoUrl;
 
 	private SourceFiles sourcefiles;
+	private ConfigFiles configFiles;
 
 	private List<Developer> developers = new ArrayList<Developer>();
 	private List<Tool> tools = new ArrayList<Tool>();
@@ -47,6 +49,14 @@ public class Project {
 		this.projectURL = "http://sourceforge.net/projects/" + projectName;
 		this.projectrestAPIURL = "ttp://sourceforge.net/rest/p/" + projectName;
 
+	}
+
+	public ConfigFiles getConfigFiles() {
+		return configFiles;
+	}
+
+	public void setConfigFiles(ConfigFiles configFiles) {
+		this.configFiles = configFiles;
 	}
 
 	/**

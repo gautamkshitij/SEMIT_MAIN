@@ -42,25 +42,23 @@ public class ProjectToJSON {
 		//
 		// bw.write("[");user
 		bw1.write("[");
-		int i = 0;
+
 		try (BufferedReader br = new BufferedReader(new FileReader(
-				"./DATA/projectNames/Java_Project_Part2.txt"))) {
+				"./DATA/projectNames/Java_ProjectName_Testing.txt"))) {
 			for (String projectName; (projectName = br.readLine()) != null;) {
-				System.out.println(i);
+
 				newProject = new JsonProjectParser()
 						.initiliazeProject(projectName);
 				String json = gson.toJson(newProject);
 				bw1.write(json);
 				bw1.write(",");
-				i++;
-				if (i == 10)
-					break;
+
 			}
 
 		}
 		// to avoid extra comma at the end of file (this is just a fix, better
 		// should be done
-		bw1.write("{}");
+		bw1.write("\n{\n}\n");
 		// bw.write("]");
 		bw1.write("]");
 		// bw.close();

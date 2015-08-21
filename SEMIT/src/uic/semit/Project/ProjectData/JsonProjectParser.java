@@ -9,18 +9,24 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 
-import uic.semit.Project.SourceCodeDownloading.DownloadFiles;
+import uic.semit.Project.ProjectData.configurationFilesJSON.ConfigFiles;
+import uic.semit.Project.ProjectData.configurationFilesJSON.FetchConfigFiles;
+import uic.semit.Project.ProjectData.sourceCodeJSON.FetchSourceFiles;
+import uic.semit.Project.ProjectData.sourceCodeJSON.SourceFiles;
 import uic.semit.Project.UserProfile.jsonTOuserProfile;
 
 public class JsonProjectParser {
 
-	public Project initiliazeProject(String ProjectName) throws Exception {
+	public Project initiliazeProject(String ProjectName) {
+
 		Project p = new Project(ProjectName);
 		JSONParser projectParser = new JSONParser();
 
 		try {
+
 			String json_string = ReadJSONfromURL
 					.getJson("http://sourceforge.net/rest/p/" + ProjectName);
+
 			if (json_string.length() != 0) {
 
 				JSONObject project = (JSONObject) projectParser
@@ -194,10 +200,6 @@ public class JsonProjectParser {
 					}
 
 					p.setTools(toolList);
-					ProjectToJSON.writeToFile(new DownloadFiles(ProjectName,
-							mountList));
-					// ObjectToJSON.projectFiles.add(new DownloadFiles(
-					// ProjectName, mountList));
 				} else {
 					toolList.add(new Tool(null, null, null, -1, null));
 				}
@@ -377,6 +379,22 @@ public class JsonProjectParser {
 			} else {
 				System.err.println("length = 0  " + ProjectName);
 			}
+
+			/*
+			 * Getting source code and configuration file code as json
+			 */
+
+			SourceFiles sourceCode = FetchSourceFiles
+					.getSourceFiles(ProjectName);
+			ConfigFiles configFiles = FetchConfigFiles
+					.getConfigFiles(ProjectName);
+			if (sourceCode != null) {
+				p.setSourcefiles(sourceCode);
+			}
+			if (configFiles != null) {
+				p.setConfigFiles(configFiles);
+			}
+
 		}
 
 		catch (Exception e) {

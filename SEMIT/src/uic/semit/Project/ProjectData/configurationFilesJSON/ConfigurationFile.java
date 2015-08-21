@@ -1,4 +1,3 @@
-
 package uic.semit.Project.ProjectData.configurationFilesJSON;
 
 import java.util.ArrayList;
@@ -12,67 +11,73 @@ import org.apache.commons.lang.builder.ToStringBuilder;
 @Generated("org.jsonschema2pojo")
 public class ConfigurationFile {
 
-    @Expose
-    private String repository;
-    @Expose
-    private List<ConfigFile> configFiles = new ArrayList<ConfigFile>();
+	@Expose
+	private String repository;
+	@Expose
+	private List<ConfigFile> configCode = new ArrayList<ConfigFile>();
 
-    /**
-     * 
-     * @return
-     *     The repository
-     */
-    public String getRepository() {
-        return repository;
-    }
+	public ConfigurationFile(String repository, List<ConfigFile> configCode) {
+		super();
+		this.repository = repository;
+		this.configCode = configCode;
+	}
 
-    /**
-     * 
-     * @param repository
-     *     The repository
-     */
-    public void setRepository(String repository) {
-        this.repository = repository;
-    }
+	/**
+	 * 
+	 * @return The repository
+	 */
+	public String getRepository() {
+		return repository;
+	}
 
-    /**
-     * 
-     * @return
-     *     The configFiles
-     */
-    public List<ConfigFile> getConfigFiles() {
-        return configFiles;
-    }
+	/**
+	 * 
+	 * @param repository
+	 *            The repository
+	 */
+	public void setRepository(String repository) {
+		this.repository = repository;
+	}
 
-    /**
-     * 
-     * @param configFiles
-     *     The configFiles
-     */
-    public void setConfigFiles(List<ConfigFile> configFiles) {
-        this.configFiles = configFiles;
-    }
+	/**
+	 * 
+	 * @return The sourceCode
+	 */
+	public List<ConfigFile> getSourceCode() {
+		return configCode;
+	}
 
-    @Override
-    public String toString() {
-        return ToStringBuilder.reflectionToString(this);
-    }
+	/**
+	 * 
+	 * @param sourceCode
+	 *            The sourceCode
+	 */
+	public void setSourceCode(List<ConfigFile> sourceCode) {
+		this.configCode = sourceCode;
+	}
 
-    @Override
-    public int hashCode() {
-        return new HashCodeBuilder().append(repository).append(configFiles).toHashCode();
-    }
+	@Override
+	public String toString() {
+		return ToStringBuilder.reflectionToString(this);
+	}
 
-    @Override
-    public boolean equals(Object other) {
-        if (other == this) {
-            return true;
-        }
-        if ((other instanceof ConfigurationFile) == false) {
-            return false;
-        }
-        ConfigurationFile rhs = ((ConfigurationFile) other);
-        return new EqualsBuilder().append(repository, rhs.repository).append(configFiles, rhs.configFiles).isEquals();
-    }
+	@Override
+	public int hashCode() {
+		return new HashCodeBuilder().append(repository).append(configCode)
+				.toHashCode();
+	}
+
+	@Override
+	public boolean equals(Object other) {
+		if (other == this) {
+			return true;
+		}
+		if ((other instanceof ConfigurationFile) == false) {
+			return false;
+		}
+		ConfigurationFile rhs = ((ConfigurationFile) other);
+		return new EqualsBuilder().append(repository, rhs.repository)
+				.append(configCode, rhs.configCode).isEquals();
+	}
 
 }

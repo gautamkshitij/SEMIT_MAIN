@@ -9,9 +9,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class FileUtils {
-	public static String readTextFile(String fileName) throws IOException {
-		String content = new String(Files.readAllBytes(Paths.get(fileName)));
-		return content;
+	public static String readTextFile(String fileName) {
+		String content = "";
+		try {
+			content = new String(Files.readAllBytes(Paths.get(fileName)));
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			System.out.println(e + "\n" + fileName);
+		}
+		if (content.length() != 0)
+			return content;
+		else
+			return null;
 	}
 
 	public static List<String> readTextFileByLines(String fileName)
